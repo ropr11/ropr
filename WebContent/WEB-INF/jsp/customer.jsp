@@ -32,7 +32,7 @@
               font-size: 12px;
               font-family: arial, sans-serif;
               list-style-type: none;
-              color: #FFE1FF;
+              color: #000;
               text-shadow: #000 1px 1px;
               margin-bottom: 10px;
               font-weight: bold;
