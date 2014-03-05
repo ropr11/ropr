@@ -26,7 +26,7 @@ public class CustomerController implements Controller {
     public ModelAndView handleRequest(HttpServletRequest hsr,
                                       HttpServletResponse hsr1) throws Exception {
         ModelAndView mv = new ModelAndView("customer");
-        String out = "VÃ½pis uÅ¾ivatelÅ¯: ";
+        String out = "Výpis uživatelù: ";
       try {
             
     	  SessionFactory sessionFactory = new Configuration()

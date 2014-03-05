@@ -13,7 +13,7 @@
               padding: 0px;outline: none;
        }
        body {
-              background: #000;
+              background: #CCCCCC;
        }
        form {
               border: 1px solid #270644;
@@ -82,12 +82,19 @@
 </head>
 
     <body>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+       
+        <p align="center">
+        Dnes je: <%= (new java.util.Date()).toLocaleString()%>
+         <br/>
         <a href="customer.htm">Výpis uživatelů</a> 
-        <a href="new_customer_form.htm">Nový uživatel</a> 
-        <br/>
-        <br/>
+        <a href="new_customer_form.htm">Nový uživatel</a>
+        </p>
         
-        <br/>
             <br/>
                 <br/>
         <%-- <form name='f' action='/login.htm' method='POST'>--%> 

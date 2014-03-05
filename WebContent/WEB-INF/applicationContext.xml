@@ -16,6 +16,9 @@
 		 login-page="/index.htm" />
 	</security:http>
         
+   
+       
+        
         <security:authentication-manager>
         <security:authentication-provider ref="daoAuthenticationProvider" />
     </security:authentication-manager>

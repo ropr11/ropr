@@ -14,7 +14,7 @@
               padding: 0px;outline: none;
        }
        body {
-              background: #000;
+              background: #CCCCCC;
        }
        form {
               border: 1px solid #270644;
@@ -81,10 +81,14 @@
        }
        </style>
 </head>
-    <body>
-        <h3>${message}</h3>
+<body>
+    <p align="center">    
+    <a href="menu.htm">Menu</a> 
+    </p>
+    <h3 align="center">Výpis uživatelů</h3>
+    
         <br/>
-        <table>
+        <table align="center" border="1" cellpadding="5" cellspacing="4" >
             <tr>
                 <th>ID</th>
                 <th>Jméno</th>
@@ -99,7 +103,9 @@
                     <td><c:out value="${customer.password}"></c:out></td>
                 </tr>
             </c:forEach>
-             </table>
+            </table>
+        <p align="center">
         <a href="index.htm">Zpět</a>
+        </p>
     </body>
 </html>

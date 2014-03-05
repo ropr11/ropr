@@ -1,15 +1,15 @@
-<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
-<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%-- 
+    Document   : menu
+    Created on : 5.3.2014, 10:50:40
+    Author     : Gahybook
+--%>
 
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
-    "http://www.w3.org/TR/html4/loose.dtd">
-
+<%@page contentType="text/html" pageEncoding="windows-1250"%>
+<!DOCTYPE html>
 <html>
     <head>
-       <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-        <title>NovÃ½ uÅ¾ivatel</title>
-       <meta name="description" >
+        <meta name="description" >
+        <title>Menu</title>
        <style type="text/css">
        * {
               margin: 0px;
@@ -83,29 +83,10 @@
        }
        </style>
 </head>
+
     <body>
-        <h3 align="center">VyplÅˆte, prosÃ­m, svÃ© osobnÃ­ Ãºdaje:</h3>
-        <spring:nestedPath path="name">
-            <form:form method="POST" commandName="customer">
-                JmÃ©no:
-                <spring:bind path="Name">
-                    <input type="text" name="${status.expression}" value="${status.value}">
-                </spring:bind>
-                     <br/>
-                Login:
-                <spring:bind path="Login">
-                    <input type="text" name="${status.expression}" value="${status.value}">
-                </spring:bind>
-                     <br/>
-                Password:
-                <spring:bind path="Password">
-                    <input type="password" name="${status.expression}" value="${status.value}">
-                </spring:bind>
-                <input type="submit" value="OK">
-            </form:form>
-        </spring:nestedPath>
-       <p align="center">
-       <a href="index.htm">ZpÄ›t</a>
-       </p>
+        <a href="customer.htm">Výpis uživatelù</a> 
+        <a href="new_customer_form.htm">Nový uživatel</a> 
+        
     </body>
 </html>
