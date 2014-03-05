@@ -11,12 +11,15 @@
 
 	<security:http auto-config="true" >
 		<security:intercept-url pattern="/customer*" access="ROLE_USER" />
+           <!--    <security:intercept-url pattern="/menu*" access="ROLE_USER" /> -->
 		 <security:form-login login-processing-url="/j_spring_security_check" 
-		 default-target-url="/customer.htm"
-		 login-page="/index.htm" />
+                 login-page="/index.htm" />
+	<!--	 default-target-url="/customer.htm" -->
+                 
 	</security:http>
         
-   
+        
+        
        
         
         <security:authentication-manager>

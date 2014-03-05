@@ -24,7 +24,7 @@
 				<prop key="customer.htm">userKey</prop>
 				<prop key="new_customer_form.htm">userFormKey</prop>
 				<prop key="login.htm">userController</prop>
-			</props>
+                        </props>
 		</property>
 	</bean>
 
