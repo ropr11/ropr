@@ -1,0 +1,76 @@
+SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0;
+SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
+SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='TRADITIONAL,ALLOW_INVALID_DATES';
+
+CREATE SCHEMA IF NOT EXISTS `ropr` DEFAULT CHARACTER SET utf8 COLLATE utf8_czech_ci ;
+USE `ropr` ;
+
+-- -----------------------------------------------------
+-- Table `ropr`.`User_role`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `ropr`.`User_role` (
+  `User_role_ID` INT NOT NULL AUTO_INCREMENT,
+  `Role` VARCHAR(45) NOT NULL,
+  PRIMARY KEY (`User_role_ID`),
+  UNIQUE INDEX `User_role_ID_UNIQUE` (`User_role_ID` ASC))
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `ropr`.`User`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `ropr`.`User` (
+  `ID_User` INT NOT NULL AUTO_INCREMENT,
+  `Login` VARCHAR(45) NOT NULL,
+  `Password` VARCHAR(45) NOT NULL,
+  `Name` VARCHAR(45) NOT NULL,
+  `Surname` VARCHAR(45) NOT NULL,
+  `E-Mail` VARCHAR(45) NOT NULL,
+  `Phone` VARCHAR(45) NULL DEFAULT NULL,
+  `City` VARCHAR(45) NOT NULL,
+  `Street` VARCHAR(45) NOT NULL,
+  `ZIP` VARCHAR(45) NOT NULL,
+  PRIMARY KEY (`ID_User`),
+  UNIQUE INDEX `ID_Customer_UNIQUE` (`ID_User` ASC))
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `ropr`.`User_authorization`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `ropr`.`User_authorization` (
+  `User_ID` INT NOT NULL AUTO_INCREMENT,
+  `Role_ID` VARCHAR(45) NOT NULL,
+  PRIMARY KEY (`User_ID`),
+  UNIQUE INDEX `User_ID_UNIQUE` (`User_ID` ASC),
+  CONSTRAINT `fk_User_role`
+    FOREIGN KEY (`User_ID`)
+    REFERENCES `ropr`.`User_role` (`User_role_ID`)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE,
+  CONSTRAINT `fk_User`
+    FOREIGN KEY (`User_ID`)
+    REFERENCES `ropr`.`User` (`ID_User`)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE)
+ENGINE = InnoDB;
+
+
+SET SQL_MODE=@OLD_SQL_MODE;
+SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
+SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
+
+
+INSERT INTO `ropr`.`user`
+(`ID_User`,
+`Login`,
+`Password`,
+`Name`,
+`Surname`,
+`E-Mail`,
+`Phone`,
+`City`,
+`Street`,
+`ZIP`)
+VALUES
+('1', 'admin', 'admin', 'admin', 'admin', 'gahy@seznam.cz', '123456789', 'Hulín', 'Poštovní', '76824');
