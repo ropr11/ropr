@@ -14,19 +14,25 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import model.Customer;
-import model.HibernateUtil;
+import model.UserRole;
+import dao.HibernateUtil;
+import dao.UserDao;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
+import java.util.Set;
 
 import org.hibernate.SQLQuery;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.mvc.Controller;
+import org.springframework.stereotype.Controller;
 import org.springframework.dao.DataAccessException;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
@@ -36,96 +42,96 @@ import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
-public class UserController implements Controller, UserDetailsService {
+@Controller
+@RequestMapping(value = "/user")
+public class UserController implements UserDetailsService {
+	
+	private UserDao userDao = new UserDao();
 	
 	private String username;
-    private String password;
-  
- 
-     private boolean accountNonExpired = true;
-     private boolean accountNonLocked = true;
-     private boolean credentialsNonExpired=true;
-     private boolean enabled=true;
-     
-	@Override
-	public ModelAndView handleRequest(HttpServletRequest hsr,
-			HttpServletResponse hsr1) throws Exception {
-		ModelAndView mv = new ModelAndView("customer");
+	private String password;
 
-		String out = "ovìøení uživatele: nesprávné heslo nebo uživatel neexistuje  ";
-		try {
+	private boolean accountNonExpired = true;
+	private boolean accountNonLocked = true;
+	private boolean credentialsNonExpired = true;
+	private boolean enabled = true;
 
-			SessionFactory sessionFactory = new Configuration()
-			// .configure("c:/Eclipse_workspaces/letecka_posta/ropr/src/hibernate.cfg.xml").buildSessionFactory();
-					.configure("hibernate.cfg.xml").buildSessionFactory();
-
-			Session session = sessionFactory.getCurrentSession();
-			// Session session =
-			// HibernateUtil.getSessionFactory().getCurrentSession();
-			if(hsr.getParameter("j_username")!= null){
-				
-				
-				Customer customer = loadCustomerByUsername(session,hsr.getParameter("j_username"));
-				if(customer != null && customer.getPassword().equalsIgnoreCase(hsr.getParameter("j_password"))){
-					mv.addObject("customer", Arrays.asList(customer));
-					
-					return mv;
-				}
-				
-			}
-			
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		//User not exists or wrong password provided
-		mv.addObject("message", out);
+	@RequestMapping(value = "/login", method = RequestMethod.GET)
+	public ModelAndView login(ModelMap model) {
+		ModelAndView mv = new ModelAndView("login");
 		return mv;
+
 	}
+
+	
+
+	/*
+	 * public ModelAndView userAuthentication (Customer customerForm) throws
+	 * Exception { ModelAndView mv = new ModelAndView("customer");
+	 * 
+	 * String out =
+	 * "ovìøení uživatele: nesprávné heslo nebo uživatel neexistuje  "; try {
+	 * 
+	 * SessionFactory sessionFactory = new Configuration() //
+	 * .configure("c:/Eclipse_workspaces/letecka_posta/ropr/src/hibernate.cfg.xml"
+	 * ).buildSessionFactory();
+	 * .configure("hibernate.cfg.xml").buildSessionFactory();
+	 * 
+	 * Session session = sessionFactory.getCurrentSession(); // Session session
+	 * = // HibernateUtil.getSessionFactory().getCurrentSession();
+	 * if(hsr.getParameter("j_username")!= null){
+	 * 
+	 * 
+	 * Customer customer =
+	 * loadCustomerByUsername(session,customerForm.getParameter("j_username"));
+	 * if(customer != null &&
+	 * customerForm.getPassword().equalsIgnoreCase(hsr.getParameter
+	 * ("j_password"))){ mv.addObject("customer", Arrays.asList(customer));
+	 * 
+	 * return mv; }
+	 * 
+	 * }
+	 * 
+	 * } catch (Exception e) { e.printStackTrace(); } //User not exists or wrong
+	 * password provided mv.addObject("message", out); return mv; }
+	 */
 
 	@Override
 	public UserDetails loadUserByUsername(String username)
 			throws UsernameNotFoundException, DataAccessException {
 
+		model.User user = null;
+		List<GrantedAuthorityImpl> authority = new ArrayList<>();
 		try {
 
-			SessionFactory sessionFactory = new Configuration()
-					.configure("hibernate.cfg.xml").buildSessionFactory();
+			/*
+			 * SessionFactory sessionFactory = new Configuration().configure(
+			 * "hibernate.cfg.xml").buildSessionFactory();
+			 */
+			Session session = HibernateUtil.getSessionFactory().getCurrentSession();
 
-			Session session = sessionFactory.getCurrentSession();
-			
-			
-			Customer customer = loadCustomerByUsername(session,username);
-			
-			
-			if (customer == null) {
-				throw new UsernameNotFoundException(username);
-
+			user = userDao.loadUserByUsername(username);
+			Set<UserRole> role = (Set<UserRole>) user.getUserRoles();
+			for (UserRole item :role ) {
+				authority.add(new GrantedAuthorityImpl(item.getRole()));
 			}
 			
-			User user = new User(customer.getLogin(), customer.getPassword(), enabled, accountNonExpired, credentialsNonExpired, accountNonLocked, Arrays.asList(new GrantedAuthorityImpl("ROLE_USER")));
-			return user;
-			
+
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+
+		if (user == null) {
+			throw new UsernameNotFoundException(username);
+		}
+
+		org.springframework.security.core.userdetails.User userDetail = new org.springframework.security.core.userdetails.User(user.getUsername(),
+				user.getPassword(), enabled, accountNonExpired, credentialsNonExpired, accountNonLocked, authority);
+		return userDetail;
+
 		
-		return null;
-	}
-	
-	private Customer loadCustomerByUsername(Session session, String username){
-		
-		session.beginTransaction();
-		
-		String queryString = "select * from ropr.customer where login=:username";
-		SQLQuery query = session.createSQLQuery(queryString);
-		query.addEntity(Customer.class);
-		query.setParameter("username", username);
-		List<Customer> result = query.list();
-		
-		session.getTransaction().commit();
-		
-		Customer customer = result.get(0);
-		return customer;
 	}
 }

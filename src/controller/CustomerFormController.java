@@ -1,7 +1,9 @@
 package controller;
 
-import model.HibernateUtil;
+import dao.HibernateUtil;
 import model.Customer;
+import model.User;
+
 import org.hibernate.Session;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.SimpleFormController;
@@ -10,7 +12,7 @@ import org.springframework.web.servlet.view.RedirectView;
 public class CustomerFormController extends SimpleFormController {
 
     public CustomerFormController() {
-        setCommandClass(Customer.class);
+        setCommandClass(User.class);
         setCommandName("customer");
         setSuccessView("customer");
         setFormView("new_customer_form");

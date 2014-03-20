@@ -14,8 +14,8 @@
 </head>
 
     <body>
-        <a href="customer.htm">Výpis uživatelù</a> 
-        <a href="new_customer_form.htm">Nový uživatel</a> 
+        <a href="list">Výpis uživatelù</a> 
+        <a href="new">Nový uživatel</a> 
         
     </body>
 </html>
