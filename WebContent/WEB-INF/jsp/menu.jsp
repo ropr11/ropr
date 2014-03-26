@@ -14,8 +14,18 @@
 </head>
 
     <body>
-        <a href="list">Výpis uživatelù</a> 
-        <a href="new">Nový uživatel</a> 
-        
+        <br /> <br /> 
+        <div align="center">
+        <a href="menu"><img src="${pageContext.request.contextPath}/menu.png" alt="menu"/></a> 
+        </div>
+        <br /> <br /><br /><br /> 
+        <div align="center">
+            
+        <a href="list"><img src="${pageContext.request.contextPath}/vypis.png" alt="vypis"/></a> 
+        <a href="new"><img src="${pageContext.request.contextPath}/novy.png" alt="novy"/></a> 
+        <br /><br />
+        <a href="list"><img src="${pageContext.request.contextPath}/vypis_objednavek.png" alt="vypis" /></a> 
+        <a href="new"><img src="${pageContext.request.contextPath}/nova_objednavka.png" alt="novy"/></a> 
+        </div>
     </body>
 </html>

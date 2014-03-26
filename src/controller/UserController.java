@@ -38,6 +38,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.GrantedAuthorityImpl;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -114,9 +115,9 @@ public class UserController implements UserDetailsService {
 			Session session = HibernateUtil.getSessionFactory().getCurrentSession();
 
 			user = userDao.loadUserByUsername(username);
-			Set<UserRole> role = (Set<UserRole>) user.getUserRoles();
-			for (UserRole item :role ) {
-				authority.add(new GrantedAuthorityImpl(item.getRole()));
+			Set<UserRole> roles = (Set<UserRole>) user.getUserRoles();
+			for (UserRole role :roles ) {
+				authority.add(new GrantedAuthorityImpl(role.getRole()));
 			}
 			
 
@@ -133,5 +134,15 @@ public class UserController implements UserDetailsService {
 		return userDetail;
 
 		
+	}
+	
+	boolean userHasRole(String role){
+		UserDetails userDetails =  (UserDetails)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		for (GrantedAuthority  grantedAuthority : userDetails.getAuthorities()) {
+			if(role.equalsIgnoreCase(grantedAuthority.getAuthority())){
+				return true;
+			}
+		}
+		return false;
 	}
 }

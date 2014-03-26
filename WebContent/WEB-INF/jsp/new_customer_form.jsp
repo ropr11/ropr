@@ -23,12 +23,12 @@
                     <input type="text" name="login">
                      <br/>
                 Password:
-                
+                <select multiple>
                  <c:forEach items="${userRoles}" var="userRole">
                 
                     <option>  <c:out value="${userRole.role}" /></option>
                   </c:forEach> 
-                   
+                 </select>  
                     <input type="password" name="password">
                 <input type="submit" value="OK">
                 
@@ -40,7 +40,7 @@
            
             </form>
        <p align="center">
-       <a href="menu">Zpět</a>
+       <a href="${pageContext.request.contextPath}/menu">Zpět</a>
        </p>
     </body>
 </html>

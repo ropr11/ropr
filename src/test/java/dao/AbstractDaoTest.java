@@ -1,5 +1,6 @@
 package test.java.dao;
 
+import dao.HibernateUtil;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
@@ -12,9 +13,7 @@ public class AbstractDaoTest {
 	
 	@Before
 	public void setUp(){
-		SessionFactory sessionFactory = new Configuration().configure(
-				"hibernate.cfg.xml").buildSessionFactory();
-		session = sessionFactory.getCurrentSession();
+		session = HibernateUtil.getSessionFactory().getCurrentSession();
 	}
 	
 	@After

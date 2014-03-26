@@ -34,9 +34,9 @@
             </c:forEach>
             </table>
         <p align="center">
-        <a href="index.htm">Zpět</a>
+        <a href="${pageContext.request.contextPath}/index.htm">Zpět</a>
         <br />	
-	<a href="<c:url value="j_spring_security_logout"/>">Logout</a>
+	<a href="{pageContext.request.contextPath}/j_spring_security_logout"/>Logout</a>
 
         </p>
     </body>
