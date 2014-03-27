@@ -12,14 +12,13 @@
 </head>
 <body>
     <p align="center">    
-    <a href="customer/nenu">Menu</a> 
+    <a href="menu">Menu</a> 
     </p>
     <h3 align="center">Výpis uživatelů</h3>
     
         <br/>
         <table align="center" border="1" cellpadding="5" cellspacing="4" >
             <tr>
-                <th>ID</th>
                 <th>Username</th>
                 <th>Heslo</th>
                 <th>Jméno</th>
@@ -27,20 +26,23 @@
                 
             </tr>
             <c:forEach items="${users}" var="user">
+            <c:url var="editUrl" value="edit?id=${user.idUser}" />
+   			<c:url var="deleteUrl" value="delete?id=${user.idUser}" />
                 <tr>
-                    <td><c:out value="${user.idUser}.toString()"></c:out></td>
                     <td><c:out value="${user.username}"></c:out></td>
                     <td><c:out value="${user.password}"></c:out></td>
                     <td><c:out value="${user.name}"></c:out></td>
                     <td><c:out value="${user.surname}"></c:out></td>
-                    
+                    <td><a href="${editUrl}">Edit</a></td>
+   					<td><a href="${deleteUrl}">Delete</a></td>
+  					
                 </tr>
             </c:forEach>
             </table>
         <p align="center">
-        <a href="custome/menu">Zpět</a>
+        <a href="${pageContext.request.contextPath}/customer/menu">Zpět</a>
         <br />	
-	<a href="<c:url value="j_spring_security_logout"/>">Logout</a>
+	<a href="<c:url value="/j_spring_security_logout"/>">Logout</a>
 
         </p>
     </body>
