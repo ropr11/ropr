@@ -15,6 +15,7 @@ import org.hibernate.Transaction;
 public class UserDao  {
 
 	private final String QUERY_USER_BY_USERNAME = "select * from ropr.user where username=:username";
+	private final String QUERY_USER_BY_USERID = "select * from ropr.user where ID_User=:userid";
 	private final String QUERY_LIST_USERS = "select * from ropr.user";
 
 	public User loadUserByUsername(String username) {
@@ -30,6 +31,26 @@ public class UserDao  {
 		
 		if (result.size() > 0) {
 			User user = result.get(0);
+			return user;
+		} else {
+			return null;
+		}
+		
+	}
+	
+	public User loadUserByUserId(Integer userid) {
+		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+		session.beginTransaction();
+
+		SQLQuery query = session.createSQLQuery(QUERY_USER_BY_USERID);
+		query.addEntity(User.class);
+		query.setParameter("userid", userid);
+		List<User> result = query.list();
+		session.getTransaction().commit();
+		
+		if (result.size() > 0) {
+			User user = result.get(0);
+			
 			return user;
 		} else {
 			return null;
