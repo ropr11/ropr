@@ -23,6 +23,8 @@
                 <th>Heslo</th>
                 <th>Jméno</th>
                 <th>Příjmení</th>
+                <th>Telefon</th>
+                <th>Město</th>
                 
             </tr>
             <c:forEach items="${users}" var="user">
@@ -33,8 +35,10 @@
                     <td><c:out value="${user.password}"></c:out></td>
                     <td><c:out value="${user.name}"></c:out></td>
                     <td><c:out value="${user.surname}"></c:out></td>
+                    <td><c:out value="${user.phone}"></c:out></td>
+                    <td><c:out value="${user.city}"></c:out></td>
                     <td><a href="${editUrl}">Edit</a></td>
-   					<td><a href="${deleteUrl}">Delete</a></td>
+                    <td><a href="${deleteUrl}">Delete</a></td>
   					
                 </tr>
             </c:forEach>

@@ -23,6 +23,9 @@
                 <th>Jméno</th>
                 <th>Login</th>
                 <th>Heslo</th>
+                <th>Příjmení</th>
+                <th>Telefon</th>
+                <th>Město</th>
             </tr>
             <c:forEach items="${customer}" var="customer">
                 <tr>
@@ -30,11 +33,15 @@
                     <td><c:out value="${customer.name}"></c:out></td>
                     <td><c:out value="${customer.login}"></c:out></td>
                     <td><c:out value="${customer.password}"></c:out></td>
+                    <td><c:out value="${customer.surname}"></c:out></td>
+                    <td><c:out value="${customer.Phone}"></c:out></td>
+                    <td><c:out value="${customer.City}"></c:out></td>
                 </tr>
             </c:forEach>
             </table>
         <p align="center">
-        <a href="${pageContext.request.contextPath}/index.htm">Zpět</a>
+    
+        <a href="index"><img src="/pic/zpet.jpg" alt="zpět"/></a> 
         <br />	
 	<a href="{pageContext.request.contextPath}/j_spring_security_logout"/>Logout</a>
 

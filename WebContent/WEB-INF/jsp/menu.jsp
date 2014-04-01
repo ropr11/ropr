@@ -16,16 +16,20 @@
     <body>
         <br /> <br /> 
         <div align="center">
-        <a href="menu"><img src="${pageContext.request.contextPath}/menu.png" alt="menu"/></a> 
+        <a href="menu"><img src="${pageContext.request.contextPath}/pic/menu.jpg" alt="menu"/></a> 
         </div>
         <br /> <br /><br /><br /> 
         <div align="center">
             
-        <a href="list"><img src="${pageContext.request.contextPath}/vypis.png" alt="vypis"/></a> 
-        <a href="new"><img src="${pageContext.request.contextPath}/novy.png" alt="novy"/></a> 
+        <a href="list"><img src="${pageContext.request.contextPath}/pic/vypuz.jpg" alt="vypis"/></a> 
+        <a href="new"><img src="${pageContext.request.contextPath}/pic/novy.jpg" alt="novy"/></a> 
         <br /><br />
-        <a href="list"><img src="${pageContext.request.contextPath}/vypis_objednavek.png" alt="vypis" /></a> 
-        <a href="new"><img src="${pageContext.request.contextPath}/nova_objednavka.png" alt="novy"/></a> 
+        <a href="list"><img src="${pageContext.request.contextPath}/pic/vypis.jpg" alt="vypis" /></a> 
+        <a href="new"><img src="${pageContext.request.contextPath}/pic/nova.jpg" alt="novy"/></a> 
+        
+        <br /> <br /> 
+        
+        <a href="${pageContext.request.contextPath}/j_spring_security_logout"/><img src="${pageContext.request.contextPath}/pic/logout.jpg" alt="logout"/></a>
         </div>
-    </body>
+</body>
 </html>

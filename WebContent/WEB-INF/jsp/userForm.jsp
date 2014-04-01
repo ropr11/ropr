@@ -1,12 +1,13 @@
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+<%@ page language="java" contentType="text/html; charset=utf-8"
     pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Nový uživatel</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>Nov� u?ivatel</title>
+<link type="text/css" rel="stylesheet" href="${pageContext.request.contextPath}/style.css" />
 </head>
 <body>
 <form:form action="new" modelAttribute="user" method="POST">
@@ -57,12 +58,14 @@
     <form:errors path="username" cssclass="error"></form:errors>
     <br />
     <label for="passwordInput">Password: </label>
-    <form:input path="password" id="passwordInput" />
+    <form:input type='password' path="password" id="passwordInput" />
     <form:errors path="password" cssclass="error"></form:errors>
     <br /><br />
     
     <br />
     <input type="submit" value="Submit" />
 </form:form>
+    <br /><br /><br /><br />
+     <a href="${pageContext.request.contextPath}/index.htm"><img src="/pic/zpet.jpg" alt="zp?t"/></a>
 </body>
 </html>
