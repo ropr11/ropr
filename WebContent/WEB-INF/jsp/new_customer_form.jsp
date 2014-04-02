@@ -1,6 +1,5 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
-<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
@@ -15,32 +14,25 @@
 </head>
     <body>
         <h3 align="center">Vyplňte, prosím, své osobní údaje:</h3>
-            <form method="POST" action="#" >
+            <form:form method="POST" modelattribute="user" commandName="new">
                 Jméno:
-                    <input type="text" name="jmeno">
+                <spring:bind path="Name">
+                    <input type="text" name="${status.expression}" value="${status.value}">
+                </spring:bind>
                      <br/>
                 Login:
-                    <input type="text" name="login">
+                <spring:bind path="Login">
+                    <input type="text" name="${status.expression}" value="${status.value}">
+                </spring:bind>
                      <br/>
                 Password:
-                <select multiple>
-                 <c:forEach items="${userRoles}" var="userRole">
-                
-                    <option>  <c:out value="${userRole.role}" /></option>
-                  </c:forEach> 
-                 </select>  
-                    <input type="password" name="password">
+                <spring:bind path="Password">
+                    <input type="password" name="${status.expression}" value="${status.value}">
+                </spring:bind>
                 <input type="submit" value="OK">
-                
-                
-                <table align="center" border="1" cellpadding="5" cellspacing="4" >
-                
-                    
-                
-           
-            </form>
+            </form:form>
        <p align="center">
-       <a href="${pageContext.request.contextPath}/menu">Zpět</a>
+       <a href="index.htm">Zpět</a>
        </p>
     </body>
 </html>
