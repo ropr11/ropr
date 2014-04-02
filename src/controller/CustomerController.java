@@ -10,7 +10,9 @@ package controller;
  *
  * @author Gahybook
  */
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import javax.validation.Valid;
 
@@ -94,6 +96,16 @@ public class CustomerController {
         }*/
     	try {
         	
+           
+            
+            Set<UserRole> newRoles = new HashSet<UserRole>();
+            
+            for (UserRole roleToSet : user.getUserRoles()) {
+            	UserRole role = userRolesDao.loadUserRoleById(Integer.parseInt(roleToSet.getRole()));
+            	newRoles.add(role);
+            }
+            user.setUserRoles(newRoles);
+            
             Session session = HibernateUtil.getSessionFactory().getCurrentSession();
             session.beginTransaction();
             if(user.getIdUser() != null && !user.getIdUser().isEmpty()){

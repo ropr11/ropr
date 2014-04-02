@@ -10,6 +10,11 @@
 </head>
 <body>
 <form:form action="new" modelAttribute="user" method="POST">
+    <label for="idInput">ID: </label>
+    <form:input path="idUser" id="idnput"></form:input>
+    <form:errors path="idUser" cssclass="error"></form:errors>
+    <br />
+    
     <label for="nameInput">Name: </label>
     <form:input path="name" id="nameInput"></form:input>
     <form:errors path="name" cssclass="error"></form:errors>
@@ -47,7 +52,7 @@
      
     <label for="role">userRoles: </label>
     <form:select path="userRoles" id="userRole">
-        <form:options items="${userRoles}"  itemLabel="role"></form:options>
+        <form:options items="${userRoles}"  itemValue="id" itemLabel="role"></form:options>
     </form:select>
     <form:errors path="userRoles" cssclass="error"></form:errors>
     <br />

@@ -17,7 +17,7 @@ import org.hibernate.Session;
 public class UserRoleDao {
 
 	private final String QUERY_LIST_ROLES = "select * from ropr.user_role";
-	private final String QUERY_USER_ROLE_BY_ID = "select * from ropr.user_role where id=:id";
+	private final String QUERY_USER_ROLE_BY_ID = "select * from ropr.user_role where User_role_ID=:id";
 
 	public List<UserRole> loadUserRoles() {
 		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
@@ -45,7 +45,7 @@ public class UserRoleDao {
 		
 	}
 	
-	public List<UserRole> loadUserRoleById(Integer id) {
+	public UserRole loadUserRoleById(Integer id) {
 		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
 		session.beginTransaction();
 		List<UserRole> userRoles = new ArrayList<UserRole>();
@@ -68,7 +68,7 @@ public class UserRoleDao {
 		session.getTransaction().commit();
 		
 		
-		return result;
+		return (UserRole) result.get(0);
 		
 	}
 	
