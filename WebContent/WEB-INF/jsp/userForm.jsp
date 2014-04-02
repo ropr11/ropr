@@ -47,7 +47,7 @@
      
     <label for="role">userRoles: </label>
     <form:select path="userRoles" id="userRole">
-        <form:options items="${userRoles}" itemValue="role" itemLabel="role"></form:options>
+        <form:options items="${userRoles}"  itemLabel="role"></form:options>
     </form:select>
     <form:errors path="userRoles" cssclass="error"></form:errors>
     <br />

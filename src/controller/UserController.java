@@ -13,14 +13,15 @@ package controller;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import model.Customer;
 import model.UserRole;
 import dao.HibernateUtil;
 import dao.UserDao;
+import dao.UserRoleDao;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
@@ -49,11 +50,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @Controller
 @RequestMapping(value = "/user")
 public class UserController implements UserDetailsService {
-	
-	private UserDao userDao = new UserDao();
-	
-	private String username;
-	private String password;
+
+	public static final String ADMIN_ROLE = "ROLE_ADMIN";
+
+	UserDao userDao = new UserDao();
+	UserRoleDao userRolesDao = new UserRoleDao();
 
 	private boolean accountNonExpired = true;
 	private boolean accountNonLocked = true;
@@ -64,10 +65,7 @@ public class UserController implements UserDetailsService {
 	public ModelAndView login(ModelMap model) {
 		ModelAndView mv = new ModelAndView("login");
 		return mv;
-
 	}
-
-	
 
 	/*
 	 * public ModelAndView userAuthentication (Customer customerForm) throws
@@ -101,25 +99,19 @@ public class UserController implements UserDetailsService {
 	 */
 
 	@Override
-	public UserDetails loadUserByUsername(String username)
-			throws UsernameNotFoundException, DataAccessException {
+	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException, DataAccessException {
 
 		model.User user = null;
 		List<GrantedAuthorityImpl> authority = new ArrayList<>();
 		try {
 
-			/*
-			 * SessionFactory sessionFactory = new Configuration().configure(
-			 * "hibernate.cfg.xml").buildSessionFactory();
-			 */
-			Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+			HibernateUtil.getSessionFactory().getCurrentSession();
 
 			user = userDao.loadUserByUsername(username);
 			Set<UserRole> roles = (Set<UserRole>) user.getUserRoles();
-			for (UserRole role :roles ) {
+			for (UserRole role : roles) {
 				authority.add(new GrantedAuthorityImpl(role.getRole()));
 			}
-			
 
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -133,16 +125,39 @@ public class UserController implements UserDetailsService {
 				user.getPassword(), enabled, accountNonExpired, credentialsNonExpired, accountNonLocked, authority);
 		return userDetail;
 
-		
 	}
-	
-	boolean userHasRole(String role){
-		UserDetails userDetails =  (UserDetails)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-		for (GrantedAuthority  grantedAuthority : userDetails.getAuthorities()) {
-			if(role.equalsIgnoreCase(grantedAuthority.getAuthority())){
+
+	boolean userHasRole(String role) {
+		UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		for (GrantedAuthority grantedAuthority : userDetails.getAuthorities()) {
+			if (role.equalsIgnoreCase(grantedAuthority.getAuthority())) {
 				return true;
 			}
 		}
 		return false;
+	}
+
+	/**
+	 * Admin role is available only for users with admin rights
+	 * 
+	 * @return
+	 */
+	public List<UserRole> setupAvailableUserRoles() {
+		List<UserRole> userRoles = userRolesDao.loadUserRoles();
+		List<UserRole> roles = new ArrayList<UserRole>();
+
+		for (Iterator iterator = userRoles.iterator(); iterator.hasNext();) {
+			UserRole role = (UserRole) iterator.next();
+			if (role.getRole().equals(ADMIN_ROLE)) {
+				if (userHasRole(ADMIN_ROLE)) {
+					roles.add(role);
+				} else {
+					continue;
+				}
+			} else {
+				roles.add(role);
+			}
+		}
+		return roles;
 	}
 }

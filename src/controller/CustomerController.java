@@ -10,46 +10,32 @@ package controller;
  *
  * @author Gahybook
  */
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.validation.Valid;
-
-import dao.HibernateUtil;
-import dao.Role;
-import dao.UserDao;
-import dao.UserRoleDao;
-
-import org.springframework.stereotype.Controller;
-
-import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
-import model.Customer;
+import javax.validation.Valid;
+
 import model.User;
 import model.UserRole;
 
 import org.hibernate.Hibernate;
 import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.hibernate.cfg.Configuration;
 import org.springframework.security.access.annotation.Secured;
-import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
+
+import dao.HibernateUtil;
+import dao.UserDao;
+import dao.UserRoleDao;
 
 @Controller
 @RequestMapping(value = "/customer")
 public class CustomerController {
-	
-	private static final String ADMIN_ROLE = "ROLE_ADMIN";
 	
 	UserDao userDao = new UserDao();
 	UserRoleDao userRolesDao = new UserRoleDao();
@@ -89,31 +75,19 @@ public class CustomerController {
 	   ModelAndView mv= new ModelAndView("/userForm");
 	   //ModelAndView mv= new ModelAndView("new_customer_form");
 	   
-	   List<UserRole> userRoles = userRolesDao.loadUserRoles();
-	   List<Role> roles = new ArrayList<Role>();
-	   
-	   for (Iterator iterator = userRoles.iterator(); iterator.hasNext();) {
-		UserRole role = (UserRole) iterator.next();
-		if(role.getRole().equals(ADMIN_ROLE)){
-			if(userController.userHasRole(ADMIN_ROLE)){
-				roles.add(new Role(role.getRole()));
-			} else{
-				continue;
-			}
-		} else{
-		roles.add(new Role(role.getRole()));
-		}
-	   }
+	   List<UserRole> roles = userController.setupAvailableUserRoles();
 	   mv.addObject("userRoles",roles);
 	   model.addAttribute("user",new User());
        return mv;
    }
+
+
    
     @RequestMapping(value = "/new", method=RequestMethod.POST)
     @Secured({"ROLE_USER","ROLE_ADMIN"})
     //public ModelAndView newCustomer (HttpServletRequest request){
     
-    public ModelAndView newCustomer(@Valid User user, BindingResult result, Model m) {
+    public ModelAndView newOrUpdateUser(@Valid User user, BindingResult result, Model m) {
         
     	/*if(result.hasErrors()) {
             return new ModelAndView(new RedirectView("new"));
@@ -122,7 +96,12 @@ public class CustomerController {
         	
             Session session = HibernateUtil.getSessionFactory().getCurrentSession();
             session.beginTransaction();
-            session.save(user);
+            if(user.getIdUser() != null && !user.getIdUser().isEmpty()){
+            	session.update(user);
+            }else{
+            	session.save(user);
+            }
+            
             session.getTransaction().commit();
         } catch (Exception e) {
             e.printStackTrace();
@@ -135,11 +114,15 @@ public class CustomerController {
     @Secured({"ROLE_USER","ROLE_ADMIN"})
     public ModelAndView showUser (@RequestParam(value="id", required=true) Integer id,Model model){
  	   ModelAndView mv= new ModelAndView("userForm");
- 	   //ModelAndView mv= new ModelAndView("new_customer_form");
  	   
  	   User user = userDao.loadUserByUserId(id);
-
- 	   mv.addObject("userRoles",user.getUserRoles());
+ 	   
+ 	   if(userController.userHasRole(UserController.ADMIN_ROLE)){
+ 		  mv.addObject("userRoles",userController.setupAvailableUserRoles()); 
+ 	   }else{
+ 		  mv.addObject("userRoles",user.getUserRoles());   
+ 	   }
+ 	   
  	   model.addAttribute("user",user);
         return mv;
     }
@@ -148,7 +131,6 @@ public class CustomerController {
     @Secured({"ROLE_USER","ROLE_ADMIN"})
     public ModelAndView deleteUser (@RequestParam(value="id", required=true) Integer id,Model model){
  	   ModelAndView mv= new ModelAndView(new RedirectView("list"));
- 	   //ModelAndView mv= new ModelAndView("new_customer_form");
  	   
  	   User user = userDao.loadUserByUserId(id);
  	   userDao.deleteUser(user);

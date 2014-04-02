@@ -1,10 +1,8 @@
 package dao;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.List;
 
-import model.Customer;
 import model.User;
 
 import org.hibernate.Hibernate;
@@ -31,6 +29,7 @@ public class UserDao  {
 		
 		if (result.size() > 0) {
 			User user = result.get(0);
+			Hibernate.initialize(user);
 			return user;
 		} else {
 			return null;

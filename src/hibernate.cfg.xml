@@ -10,7 +10,7 @@
     <property name="hibernate.connection.username">ropr</property>
     <property name="hibernate.connection.password">ropr</property>
     <property name="hibernate.current_session_context_class">thread</property>
-    <mapping resource="model/Employee.hbm.xml"/>
+    <!--  <mapping resource="model/Employee.hbm.xml"/> -->
     <!--  <mapping resource="model/Customer.hbm.xml"/>  -->
     <mapping resource="model/User.hbm.xml"/>
     <mapping resource="model/UserRole.hbm.xml"/>

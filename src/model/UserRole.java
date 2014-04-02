@@ -10,7 +10,7 @@ import java.util.Set;
  */
 public class UserRole implements java.io.Serializable {
 
-	private Integer userRoleId;
+	private Integer id;
 	private String role;
 	private Set users = new HashSet(0);
 
@@ -26,12 +26,12 @@ public class UserRole implements java.io.Serializable {
 		this.users = users;
 	}
 
-	public Integer getUserRoleId() {
-		return this.userRoleId;
+	public Integer getId() {
+		return this.id;
 	}
 
-	public void setUserRoleId(Integer userRoleId) {
-		this.userRoleId = userRoleId;
+	public void setId(Integer userRoleId) {
+		this.id = userRoleId;
 	}
 
 	public String getRole() {

@@ -4,7 +4,7 @@
 <!-- Generated Mar 19, 2014 11:06:25 AM by Hibernate Tools 4.0.0 -->
 <hibernate-mapping>
     <class name="model.UserRole" table="user_role" catalog="ropr">
-        <id name="userRoleId" type="java.lang.Integer">
+        <id name="id" type="java.lang.Integer">
             <column name="User_role_ID" />
             <generator class="identity" />
         </id>

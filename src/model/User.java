@@ -144,11 +144,11 @@ public class User implements java.io.Serializable {
 		this.zip = zip;
 	}
 
-	public Set getUserRoles() {
+	public Set<UserRole> getUserRoles() {
 		return this.userRoles;
 	}
 
-	public void setUserRoles(Set userRoles) {
+	public void setUserRoles(Set<UserRole> userRoles) {
 		this.userRoles = userRoles;
 	}
 
