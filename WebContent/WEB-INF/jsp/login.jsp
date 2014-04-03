@@ -51,6 +51,9 @@
                 <tr>  
                     <td colspan='2'><input name="reset" type="reset" />  
                     </td>  
+                </tr>
+                <tr>
+                <td><a href="remind">Zapomenuté heslo</a></td>
                 </tr>  
             </table>  
         </form>  

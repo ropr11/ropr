@@ -29,8 +29,11 @@ import org.hibernate.SQLQuery;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
+import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.view.RedirectView;
 import org.springframework.stereotype.Controller;
 import org.springframework.dao.DataAccessException;
 import org.springframework.security.access.annotation.Secured;
@@ -53,6 +56,7 @@ public class UserController implements UserDetailsService {
 
 	public static final String ADMIN_ROLE = "ROLE_ADMIN";
 
+	public static List<String> questions = new ArrayList(Arrays.asList(new String[]{"Oblíbený film","Oblíbená kniha","Oblíbené místo","Oblíbený uèitel"}));
 	UserDao userDao = new UserDao();
 	UserRoleDao userRolesDao = new UserRoleDao();
 
@@ -66,6 +70,25 @@ public class UserController implements UserDetailsService {
 		ModelAndView mv = new ModelAndView("login");
 		return mv;
 	}
+	 @RequestMapping(value = "/remind", method = RequestMethod.GET)
+		public ModelAndView navigateRemind(Model model) {
+			ModelAndView mv = new ModelAndView("remind");
+			model.addAttribute("user",new model.User());
+			model.addAttribute("hints",questions);
+			return mv;
+
+		}
+	    
+	    @RequestMapping(value = "/remind", method = RequestMethod.POST)
+	   	public ModelAndView remind(model.User user, BindingResult result, Model m) {
+	    	model.User userByUsername=userDao.loadUserByUsername(user.getUsername());
+	    	if(user.getHint().equalsIgnoreCase(userByUsername.getHint()) && 
+	   				(user.getPassphrase().equalsIgnoreCase(userByUsername.getPassphrase()))){
+	    		return new ModelAndView(new RedirectView("/RoprProjekt/customer/list"));
+	   		} else{
+	   			 return  new ModelAndView(new RedirectView("/RoprProjekt/user/login"));
+	   		}
+	   	}
 
 	/*
 	 * public ModelAndView userAuthentication (Customer customerForm) throws

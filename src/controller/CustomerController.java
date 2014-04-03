@@ -35,10 +35,12 @@ import org.springframework.web.servlet.view.RedirectView;
 import dao.HibernateUtil;
 import dao.UserDao;
 import dao.UserRoleDao;
+import edu.emory.mathcs.backport.java.util.Arrays;
 
 @Controller
 @RequestMapping(value = "/customer")
 public class CustomerController {
+	
 	
 	UserDao userDao = new UserDao();
 	UserRoleDao userRolesDao = new UserRoleDao();
@@ -89,6 +91,7 @@ public class CustomerController {
 	   
 	   List<UserRole> roles = userController.setupAvailableUserRoles();
 	   mv.addObject("userRoles",roles);
+	   mv.addObject("questions",UserController.questions);
 	   model.addAttribute("user",new User());
        return mv;
    }
@@ -144,7 +147,7 @@ public class CustomerController {
  	   }else{
  		  mv.addObject("userRoles",user.getUserRoles());   
  	   }
- 	   
+ 	   model.addAttribute("hints",UserController.questions);
  	   model.addAttribute("user",user);
         return mv;
     }
@@ -159,5 +162,7 @@ public class CustomerController {
 
         return mv;
     }
+    
+   
     
 }

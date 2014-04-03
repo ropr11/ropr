@@ -33,6 +33,9 @@ public class User implements java.io.Serializable {
 	@NotEmpty
 	private String zip;
 	private Set userRoles = new HashSet();
+	
+	private String hint;
+	private String passphrase;
 
 	public User() {
 	}
@@ -151,5 +154,23 @@ public class User implements java.io.Serializable {
 	public void setUserRoles(Set<UserRole> userRoles) {
 		this.userRoles = userRoles;
 	}
+
+	public String getHint() {
+		return hint;
+	}
+
+	public void setHint(String hint) {
+		this.hint = hint;
+	}
+
+	public String getPassphrase() {
+		return passphrase;
+	}
+
+	public void setPassphrase(String passphrase) {
+		this.passphrase = passphrase;
+	}
+	
+	
 
 }
