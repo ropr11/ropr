@@ -10,6 +10,7 @@ package controller;
  *
  * @author Gahybook
  */
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -56,13 +57,22 @@ public class CustomerController {
     public ModelAndView listCustomers (){
         ModelAndView mv = new ModelAndView("users");
         String out = "Výpis uživatelù: ";
+        List<User> users;
       try {
-            List<User> users = userDao.listUsers();
+    	  if(userController.userHasRole(UserController.ADMIN_ROLE)){
+    		  users = userDao.listUsers();
+              
+              for (User user : users) {
+              	Hibernate.initialize(user);
+  				user.setIdUser(String.valueOf(user.getIdUser()));
+  			}
+    	  } else {
+    		  users = new ArrayList<User>();
+    		  User current = userController.getCurrentUser();
+    		  current.setIdUser(String.valueOf(current.getIdUser()));
+    		  users.add(current);
+    	  }
             
-            for (User user : users) {
-            	Hibernate.initialize(user);
-				user.setIdUser(String.valueOf(user.getIdUser()));
-			}
             mv.addObject("users", users);
         } catch (Exception e) {
            e.printStackTrace();

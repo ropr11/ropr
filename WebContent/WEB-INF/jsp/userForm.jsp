@@ -6,12 +6,14 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Nový uživatel</title>
+<link type="text/css" rel="stylesheet" href="${pageContext.request.contextPath}/style.css" />
+<title>Nov� u?ivatel</title>
 </head>
 <body>
 <form:form action="new" modelAttribute="user" method="POST">
-    <label for="idInput">ID: </label>
-    <form:input path="idUser" id="idnput"></form:input>
+    <label for="id"></label>
+    <form:input type="hidden" path="idUser" id="idUser"></form:input>
+
     <form:errors path="idUser" cssclass="error"></form:errors>
     <br />
     
@@ -62,7 +64,7 @@
     <form:errors path="username" cssclass="error"></form:errors>
     <br />
     <label for="passwordInput">Password: </label>
-    <form:input path="password" id="passwordInput" />
+    <form:input type="password" path="password" id="passwordInput" />
     <form:errors path="password" cssclass="error"></form:errors>
     <br /><br />
     

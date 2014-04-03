@@ -127,7 +127,7 @@ public class UserController implements UserDetailsService {
 
 	}
 
-	boolean userHasRole(String role) {
+	public boolean userHasRole(String role) {
 		UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		for (GrantedAuthority grantedAuthority : userDetails.getAuthorities()) {
 			if (role.equalsIgnoreCase(grantedAuthority.getAuthority())) {
@@ -135,6 +135,11 @@ public class UserController implements UserDetailsService {
 			}
 		}
 		return false;
+	}
+	
+	public model.User getCurrentUser(){
+			UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+			return userDao.loadUserByUsername(userDetails.getUsername());
 	}
 
 	/**
