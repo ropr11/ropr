@@ -67,15 +67,14 @@
     <form:input type="password" path="password" id="passwordInput" />
     <form:errors path="password" cssclass="error"></form:errors>
     <br /><br />
-   
-    <label for="hints">Otázka: </label>
+    <label for="hints">Otazka: </label>
     <select name = "hint">
      <c:forEach items="${hints}" var="hint">
                     <option value="${hint}">${hint}</option>
       </c:forEach>
     </select>
-     <br />
-     <label for="passphraseInput">Odpoveď </label>
+     <br /><br />
+     <label for="passphraseInput">Odpoved� </label>
     <form:input  path="passphrase" id="passphrase" />
     <form:errors path="passphrase" cssclass="error"></form:errors>
     <br /><br />

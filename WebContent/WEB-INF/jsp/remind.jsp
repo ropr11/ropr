@@ -7,7 +7,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <link type="text/css" rel="stylesheet" href="${pageContext.request.contextPath}/style.css" />
-<title>Novï¿½ u?ivatel</title>
+<title>Nov� u?ivatel</title>
 </head>
 <body>
 <form:form action="remind" modelAttribute="user" method="POST">
@@ -16,14 +16,14 @@
     <form:input path="username" id="usernameInput" />
     <form:errors path="username" cssclass="error"></form:errors>
      <br />
-    <label for="hints">Otázka: </label>
+    <label for="hints">Otazka: </label>
     <select name = "hint">
      <c:forEach items="${hints}" var="hint">
                     <option value="${hint}">${hint}</option>
       </c:forEach>
     </select>
      <br />
-     <label for="passphraseInput">Odpoveď </label>
+     <label for="passphraseInput">Odpoved� </label>
     <form:input  path="passphrase" id="passphrase" />
     <form:errors path="passphrase" cssclass="error"></form:errors>
     <br /><br />
