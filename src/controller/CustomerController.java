@@ -47,7 +47,7 @@ public class CustomerController {
 	UserController userController = new UserController();
 	
 	@RequestMapping(value = "/menu", method = RequestMethod.GET)
-	@Secured({"ROLE_USER","ROLE_ADMIN"})
+	@Secured({"ROLE_USER",UserController.ADMIN_ROLE})
 	public ModelAndView loginForm() {
 		ModelAndView mv = new ModelAndView("menu");
 		return mv;
@@ -113,11 +113,20 @@ public class CustomerController {
             
             Set<UserRole> newRoles = new HashSet<UserRole>();
             
-            for (UserRole roleToSet : user.getUserRoles()) {
-            	UserRole role = userRolesDao.loadUserRoleById(Integer.parseInt(roleToSet.getRole()));
-            	newRoles.add(role);
+            //save changes done in user role setup 
+            if( user.getUserRoles() != null){
+            	for (UserRole roleToSet : user.getUserRoles()) {
+                	UserRole role = userRolesDao.loadUserRoleById(Integer.parseInt(roleToSet.getRole()));
+                	newRoles.add(role);
+                }
+                user.setUserRoles(newRoles);
+            }else{
+            	//no changes then setup origin roles
+            	User userFromDb = userDao.loadUserByUsername(user.getUsername());
+            	user.setUserRoles(userFromDb.getUserRoles());
             }
-            user.setUserRoles(newRoles);
+            
+            
             
             Session session = HibernateUtil.getSessionFactory().getCurrentSession();
             session.beginTransaction();

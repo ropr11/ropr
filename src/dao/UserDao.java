@@ -83,5 +83,16 @@ public class UserDao  {
 		return result;
 	}
 	
-	
+	public void updateUserPassword(User user, String password){
+		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+		Transaction transaction = session.beginTransaction();
+		SQLQuery query = session.createSQLQuery(QUERY_USER_BY_USERNAME);
+		query.addEntity(User.class);
+		query.setParameter("username", user.getUsername());
+		List<User> result = query.list();
+		User userFromDb = result.get(0);
+		userFromDb.setPassword(password);
+		//save changes
+		transaction.commit();
+	}
 }

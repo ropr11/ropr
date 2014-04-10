@@ -55,6 +55,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 public class UserController implements UserDetailsService {
 
 	public static final String ADMIN_ROLE = "ROLE_ADMIN";
+	public static final String EMPLOYEE_ROLE = "ROLE_USER";
+	public static final String CUSTOMER_ROLE = "CUSTOMER";
 
 	public static List<String> questions = new ArrayList(Arrays.asList(new String[]{"Oblíbený film","Oblíbená kniha","Oblíbené místo","Oblíbený uèitel"}));
 	UserDao userDao = new UserDao();
@@ -84,7 +86,8 @@ public class UserController implements UserDetailsService {
 	    	model.User userByUsername=userDao.loadUserByUsername(user.getUsername());
 	    	if(user.getHint().equalsIgnoreCase(userByUsername.getHint()) && 
 	   				(user.getPassphrase().equalsIgnoreCase(userByUsername.getPassphrase()))){
-	    		return new ModelAndView(new RedirectView("/RoprProjekt/customer/list"));
+	    		userDao.updateUserPassword(user, user.getPassword());
+	    		return new ModelAndView("password_reset");
 	   		} else{
 	   			 return  new ModelAndView(new RedirectView("/RoprProjekt/user/login"));
 	   		}
