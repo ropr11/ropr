@@ -1,27 +1,15 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
-<!-- Generated 3.12.2013 12:14:03 by Hibernate Tools 3.6.0 -->
+<!-- Generated 16.4.2014 18:21:38 by Hibernate Tools 3.6.0 -->
 <hibernate-mapping>
     <class name="model.Employee" table="employee" catalog="ropr">
-        <id name="employeeId" type="int">
+        <id name="employeeId" type="java.lang.Integer">
             <column name="Employee_ID" />
-            <generator class="assigned" />
+            <generator class="identity" />
         </id>
-        <property name="name" type="string">
-            <column name="Name" length="15" not-null="true" />
+        <property name="employeeRoleId" type="java.lang.Integer">
+            <column name="Employee_Role_ID" />
         </property>
-        <property name="login" type="string">
-            <column name="Login" length="45" not-null="true" />
-        </property>
-        <property name="password" type="string">
-            <column name="Password" length="45" not-null="true" />
-        </property>
-        <set name="userRoleses" table="user_roles" inverse="true" lazy="true" fetch="select">
-            <key>
-                <column name="FK_Employee_ID" not-null="true" />
-            </key>
-            <one-to-many class="model.UserRole" />
-        </set>
     </class>
 </hibernate-mapping>

@@ -1,9 +1,9 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
-<!-- Generated Mar 19, 2014 11:06:25 AM by Hibernate Tools 4.0.0 -->
+<!-- Generated 16.4.2014 18:21:38 by Hibernate Tools 3.6.0 -->
 <hibernate-mapping>
-    <class name="model/EmployeeRole" table="employee_role" catalog="ropr">
+    <class name="model.EmployeeRole" table="employee_role" catalog="ropr">
         <id name="roleId" type="java.lang.Integer">
             <column name="role_ID" />
             <generator class="identity" />
