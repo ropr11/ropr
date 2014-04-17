@@ -1,24 +1,14 @@
 package test.java.dao;
 
-import dao.HibernateUtil;
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.hibernate.cfg.Configuration;
-import org.junit.After;
-import org.junit.Before;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
+
+import dao.OrderDao;
+import dao.UserDao;
 
 public class AbstractDaoTest {
-	
-	protected Session session;
-	
-	@Before
-	public void setUp(){
-		session = HibernateUtil.getSessionFactory().getCurrentSession();
-	}
-	
-	@After
-	public void tearDown(){
-		session.close();
-	}
-	
+
+	protected OrderDao orderDao = new OrderDao();
+	protected UserDao userDao = new UserDao();
+	protected Calendar calendar = new GregorianCalendar();
 }

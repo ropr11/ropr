@@ -56,7 +56,7 @@ public class UserController implements UserDetailsService {
 
 	public static final String ADMIN_ROLE = "ROLE_ADMIN";
 	public static final String EMPLOYEE_ROLE = "ROLE_USER";
-	public static final String CUSTOMER_ROLE = "CUSTOMER";
+	public static final String CUSTOMER_ROLE = "ROLE_CUSTOMER";
 
 	public static List<String> questions = new ArrayList(Arrays.asList(new String[]{"Oblíbený film","Oblíbená kniha","Oblíbené místo","Oblíbený uèitel"}));
 	UserDao userDao = new UserDao();
@@ -72,6 +72,13 @@ public class UserController implements UserDetailsService {
 		ModelAndView mv = new ModelAndView("login");
 		return mv;
 	}
+	
+	@RequestMapping(value = "/index", method = RequestMethod.GET)
+	public ModelAndView indexTest(ModelMap model) {
+		ModelAndView mv = new ModelAndView("index");
+		return mv;
+	}
+	
 	 @RequestMapping(value = "/remind", method = RequestMethod.GET)
 		public ModelAndView navigateRemind(Model model) {
 			ModelAndView mv = new ModelAndView("remind");

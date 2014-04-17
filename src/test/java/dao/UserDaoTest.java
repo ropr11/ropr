@@ -14,34 +14,32 @@ import org.junit.Ignore;
 //@ContextConfiguration(locations ="classpath:applicationContext.xml"));
 
 
-public class UserDaoTest  {
+public class UserDaoTest extends AbstractDaoTest  {
 	
-	UserDao userDao = new UserDao();
-	
+	@Ignore
 	@Test
-        @Ignore
-        public void createNewUserTest() {
+	public void createNewUserTest() {
 		User user = new User();
 		user.setUsername("test");
 		user.setName("test");
 		user.setPassword("test");
 		user.setSurname("testSurname");
-		user.setName("testName");
+		user.setName("testName@test.com");
 		user.setEmail("testEmail");
 		user.setCity("testCity");
 		user.setStreet("testStreet");
 		user.setZip("testZip");
 		user.setPhone("123456");
-		
+
 		Serializable id = userDao.createNewUser(user);
 		assertNotNull(id);
-		
-		//Verify operation
+
+		// Verify operation
 		User userFromDb = userDao.loadUserByUsername(user.getUsername());
 		assertNotNull(userFromDb);
 		assertEquals(user.getUsername(), userFromDb.getUsername());
-		
-		//Clean
+
+		// Clean
 		userDao.deleteUser(userFromDb);
 	}
 

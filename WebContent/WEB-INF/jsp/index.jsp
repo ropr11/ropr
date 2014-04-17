@@ -1,29 +1,34 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
-    "http://www.w3.org/TR/html4/loose.dtd">
-
+<!DOCTYPE html>
 <html>
     <head>
-       <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-        <title>Hlavní strana</title>
-        <link type="text/css" rel="stylesheet" href="${pageContext.request.contextPath}/style.css" />
+        <meta name="description" >
+        <title>Menu</title>
+       <link type="text/css" rel="stylesheet" href="${pageContext.request.contextPath}/style.css" />
 </head>
+
     <body>
-        <br/>
-        <br/>
-        <br/>
-        <br/>
-        <br/>
-       
-        <p align="center">
-        Dnes je: <%= (new java.util.Date()).toLocaleString()%>
-         <br/>
-        <a href="customer.htm">Výpis uživatelů</a> 
-        <a href="new_customer_form.htm">Nový uživatel</a>
-        </p>
+        <br /> <br /> 
+        <div align="center">
+        <a href="menu"><img src="${pageContext.request.contextPath}/pic/menu.jpg" alt="menu"/></a> 
+        </div>
+        <br /> <br /><br /><br /> 
+        <div align="center">
+            
+        <a href="list"><img src="${pageContext.request.contextPath}/pic/vypuz.jpg" alt="vypis"/></a> 
+        <a href="new"><img src="${pageContext.request.contextPath}/pic/novy.jpg" alt="novy"/></a> 
+        <br /><br />
+        <a href="list"><img src="${pageContext.request.contextPath}/pic/vypis.jpg" alt="vypis" /></a> 
+        <a href="new"><img src="${pageContext.request.contextPath}/pic/nova.jpg" alt="novy"/></a> 
+        <br />
+        <a href="${pageContext.request.contextPath}/j_spring_security_logout"/><img src="${pageContext.request.contextPath}/pic/logout.jpg" alt="logout"/></a>
+        </div>
         
-            <br/>
-                <br/>
+        
+    </body>
+</html>
+                
+                
         <%-- <form name='f' action='/login.htm' method='POST'>--%> 
         <form name='f' action='j_spring_security_check' method='POST'>
             <table>  

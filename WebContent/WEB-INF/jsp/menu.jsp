@@ -1,10 +1,5 @@
-<%-- 
-    Document   : menu
-    Created on : 5.3.2014, 10:50:40
-    Author     : Gahybook
---%>
-
-<%@page contentType="text/html" pageEncoding="windows-1250"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
     <head>
@@ -21,11 +16,11 @@
         <br /> <br /><br /><br /> 
         <div align="center">
             
-        <a href="list"><img src="${pageContext.request.contextPath}/pic/vypuz.jpg" alt="vypis"/></a> 
-        <a href="new"><img src="${pageContext.request.contextPath}/pic/novy.jpg" alt="novy"/></a> 
-        <br /><br />
-        <a href="list"><img src="${pageContext.request.contextPath}/pic/vypis.jpg" alt="vypis" /></a> 
-        <a href="new"><img src="${pageContext.request.contextPath}/pic/nova.jpg" alt="novy"/></a> 
+         <c:forEach items="${urls}" var="url">
+                <tr>
+                    <td><c:out value="${url}" escapeXml="false"></c:out></td>
+                </tr>
+            </c:forEach> 
         <br />
         <a href="${pageContext.request.contextPath}/j_spring_security_logout"/><img src="${pageContext.request.contextPath}/pic/logout.jpg" alt="logout"/></a>
         </div>

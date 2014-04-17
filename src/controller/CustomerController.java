@@ -10,6 +10,8 @@ package controller;
  *
  * @author Gahybook
  */
+import java.net.URI;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -41,15 +43,29 @@ import edu.emory.mathcs.backport.java.util.Arrays;
 @RequestMapping(value = "/customer")
 public class CustomerController {
 	
-	
+	private final String URL_USER_LIST =  "<a href='list'><img src='/RoprProjekt/pic/vypuz.jpg' alt='vypis' /><a>";
+	private final String URL_USER_NEW = "<a href='new'><img src='/RoprProjekt/pic/novy.jpg' alt='novy' /></a>"; 
+    private final String URL_ORDER_LIST = "<a href='/RoprProjekt/order/list'><img src='/RoprProjekt/pic/vypis.jpg' alt='vypis' /></a>"; 
+    private final String URL_ORDER_NEW = "<a href='/RoprProjekt/order/new'><img src='/RoprProjekt/pic/nova.jpg' alt='novy' /></a>"; 
 	UserDao userDao = new UserDao();
 	UserRoleDao userRolesDao = new UserRoleDao();
 	UserController userController = new UserController();
 	
 	@RequestMapping(value = "/menu", method = RequestMethod.GET)
-	@Secured({"ROLE_USER",UserController.ADMIN_ROLE})
+	@Secured({"ROLE_USER",UserController.ADMIN_ROLE,UserController.CUSTOMER_ROLE})
 	public ModelAndView loginForm() {
 		ModelAndView mv = new ModelAndView("menu");
+		Set<String> urls = new HashSet<String>();
+		User currentUser = userController.getCurrentUser();
+		if(userController.userHasRole("ROLE_USER")|| userController.userHasRole("ROLE_ADMIN")){
+			urls.add(URL_USER_LIST);
+			urls.add(URL_USER_NEW);
+		} 
+		
+		urls.add(URL_ORDER_LIST);
+		urls.add(URL_ORDER_NEW);
+		//URL url = new URL(base url, relative url);
+		mv.addObject("urls",urls);
 		return mv;
 
 	}
@@ -91,7 +107,7 @@ public class CustomerController {
 	   
 	   List<UserRole> roles = userController.setupAvailableUserRoles();
 	   mv.addObject("userRoles",roles);
-	   mv.addObject("questions",UserController.questions);
+	   mv.addObject("hints",UserController.questions);
 	   model.addAttribute("user",new User());
        return mv;
    }

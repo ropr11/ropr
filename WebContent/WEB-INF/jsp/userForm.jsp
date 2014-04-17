@@ -52,7 +52,7 @@
     <form:errors path="zip" cssclass="error"></form:errors>
     <br />
      
-    <label for="role">userRoles: </label>
+    <label for="role">New User Roles: </label>
     <form:select path="userRoles" id="userRole">
         <form:options items="${userRoles}"  itemValue="id" itemLabel="role"></form:options>
     </form:select>

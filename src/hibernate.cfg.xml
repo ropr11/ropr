@@ -12,6 +12,7 @@
     <property name="hibernate.current_session_context_class">thread</property>
     <!--  <mapping resource="model/Employee.hbm.xml"/> -->
     <!--  <mapping resource="model/Customer.hbm.xml"/>  -->
+    <mapping resource="model/Order.hbm.xml" />
     <mapping resource="model/User.hbm.xml"/>
     <mapping resource="model/UserRole.hbm.xml"/>
   </session-factory>
