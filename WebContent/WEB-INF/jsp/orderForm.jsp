@@ -13,7 +13,7 @@
         <a href="${pageContext.request.contextPath}/j_spring_security_logout"/><img src="${pageContext.request.contextPath}/pic/logout.jpg" alt="logout"/></a><br/>
       <a href="/index.htm"><img src="${pageContext.request.contextPath}/pic/zpet.jpg"></a>
     </div>
-        <h1>Objednávka služby</h1>
+    <h1 align="center">Objednávka služby</h1>
         <br>
         <form:form action="new" modelAttribute="order" method="POST">
             <label for="dateInput">Datum: </label>

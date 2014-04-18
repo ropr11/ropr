@@ -21,7 +21,7 @@
     </div>
         <br/>
         
-        <table align="center" border="1" cellpadding="5" cellspacing="4" >
+        <table align="center" border="3" cellspacing="4" cellpadding="2" frame="box" >
             <tr>
                 <th>ID</th>
                 <th>Jméno</th>

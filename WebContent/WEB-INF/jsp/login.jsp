@@ -32,14 +32,14 @@
                 <br/>
         <%-- <form name='f' action='/login.htm' method='POST'>--%> 
         <form name='f' action='/RoprProjekt/j_spring_security_check' method='POST'>
-            <table>  
-                <tr>  
-                    <td>User:</td>  
+            <table width="380">  
+                <tr >  
+                    <td>Login:</td>  
                     <td><input type='text' name='j_username' >  
                     </td>  
                 </tr>  
                 <tr>  
-                    <td>Password:</td>  
+                    <td>Heslo:  </td>  
                     <td><input type='password' name='j_password' />  
                     </td>  
                 </tr>  
@@ -53,7 +53,8 @@
                     </td>  
                 </tr>
                 <tr>
-                <td><a href="remind">Zapomenuté heslo</a></td>
+                    <td> </td>
+                    <td align="right"><a href="remind" style="text-decoration: none">Zapomenuté heslo</a></td>
                 </tr>  
             </table>  
         </form>  
