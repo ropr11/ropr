@@ -29,19 +29,20 @@
                 </td>
             </tr>
             <tr>
-                <td><label for="role">Nová role: </label>
-                <form:select path="userRoles" id="userRole">
-                    <form:options items="${userRoles}"  itemValue="id" itemLabel="role"></form:options>
-                </form:select>
-                <form:errors path="userRoles" cssclass="error"></form:errors></td>
+                <td> <label for="usernameInput">Jméno: </label>
+                <form:input path="username" id="usernameInput" />
+                <form:errors path="username" cssclass="error"></form:errors></td>
+                
                 <td><label for="surnameInput">Příjmení:</label>
                 <form:input path="surname" id="surnameInput"></form:input>
                 <form:errors path="surname" cssclass="error"></form:errors></td>
             </tr>
             <tr>
-                <td> <label for="usernameInput">Jméno: </label>
-                <form:input path="username" id="usernameInput" />
-                <form:errors path="username" cssclass="error"></form:errors></td>
+                <td><label for="role">Nová role: </label>
+                <form:select path="userRoles" id="userRole">
+                    <form:options items="${userRoles}"  itemValue="id" itemLabel="role"></form:options>
+                </form:select>
+                <form:errors path="userRoles" cssclass="error"></form:errors></td>
                 <td><label for="phoneInput">Telefon </label>
                 <form:input path="phone" id="phoneInput"></form:input>
                 <form:errors path="phone" cssclass="error"></form:errors></td>
