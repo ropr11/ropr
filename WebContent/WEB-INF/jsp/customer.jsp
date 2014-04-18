@@ -10,13 +10,17 @@
        <meta name="description" >
        <link type="text/css" rel="stylesheet" href="${pageContext.request.contextPath}/style.css" />
 </head>
-<body>
+<body >
     <p align="center">    
     <a href="menu.htm">Menu</a> 
     </p>
     <h3 align="center">Výpis uživatelů</h3>
-    
+    <div align="right">
+        <a href="${pageContext.request.contextPath}/j_spring_security_logout"/><img src="${pageContext.request.contextPath}/pic/logout.jpg" alt="logout"/></a><br/>
+      <a href="${pageContext.request.contextPath}/index.htm"><img src="${pageContext.request.contextPath}/pic/zpet.jpg"></a>
+    </div>
         <br/>
+        
         <table align="center" border="1" cellpadding="5" cellspacing="4" >
             <tr>
                 <th>ID</th>
@@ -33,11 +37,6 @@
                 </tr>
             </c:forEach>
             </table>
-        <p align="center">
-        <a href="${pageContext.request.contextPath}/index.htm">Zpět</a>
-        <br />	
-	<a href="{pageContext.request.contextPath}/j_spring_security_logout"/>Logout</a>
-
-        </p>
+        
     </body>
 </html>

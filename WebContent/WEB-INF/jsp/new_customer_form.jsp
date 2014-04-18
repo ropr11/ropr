@@ -13,6 +13,10 @@
        <link type="text/css" rel="stylesheet" href="${pageContext.request.contextPath}/style.css" />
 </head>
     <body>
+     <div align="right">
+        <a href="${pageContext.request.contextPath}/j_spring_security_logout"/><img src="${pageContext.request.contextPath}/pic/logout.jpg" alt="logout"/></a><br/>
+      <a href="/index.htm"><img src="${pageContext.request.contextPath}/pic/zpet.jpg"></a>
+    </div>
         <h3 align="center">Vyplňte, prosím, své osobní údaje:</h3>
             <form:form method="POST" modelattribute="user" commandName="new">
                 Jméno:
@@ -31,8 +35,5 @@
                 </spring:bind>
                 <input type="submit" value="OK">
             </form:form>
-       <p align="center">
-       <a href="index.htm">Zpět</a>
-       </p>
-    </body>
+      </body>
 </html>

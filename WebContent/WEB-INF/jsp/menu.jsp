@@ -9,7 +9,11 @@
 </head>
 
     <body>
-        <br /> <br /> 
+        <br />
+        <div align="right">
+               <a href="${pageContext.request.contextPath}/j_spring_security_logout"/><img src="${pageContext.request.contextPath}/pic/logout.jpg" alt="logout"/></a>
+        </div>
+        <br /> <br /> <br /> <br /> <br /> 
         <div align="center">
         <a href="menu"><img src="${pageContext.request.contextPath}/pic/menu.jpg" alt="menu"/></a> 
         </div>
@@ -22,7 +26,7 @@
                 </tr>
             </c:forEach> 
         <br />
-        <a href="${pageContext.request.contextPath}/j_spring_security_logout"/><img src="${pageContext.request.contextPath}/pic/logout.jpg" alt="logout"/></a>
+ 
         </div>
         
         

@@ -11,9 +11,11 @@
        <link type="text/css" rel="stylesheet" href="${pageContext.request.contextPath}/style.css" />
 </head>
 <body>
-    <p align="center">    
-     <a href="${pageContext.request.contextPath}/customer/menu">Menu</a>
-    </p>
+     <div align="right">
+        <a href="${pageContext.request.contextPath}/j_spring_security_logout"/><img src="${pageContext.request.contextPath}/pic/logout.jpg" alt="logout"/></a><br/>
+      <a href="/index.htm"><img src="${pageContext.request.contextPath}/pic/zpet.jpg"></a>
+    </div>
+    
     <h3 align="center">Výpis objednávek</h3>
     
         <br/>
@@ -45,11 +47,6 @@
                 </tr>
             </c:forEach>
             </table>
-        <p align="center">
-       
-        <br />	
-	<a href="<c:url value="/j_spring_security_logout"/>">Logout</a>
-
-        </p>
+        
     </body>
 </html>
