@@ -17,7 +17,7 @@
     <h3 align="center">Výpis uživatelů</h3>
     <div align="right">
         <a href="${pageContext.request.contextPath}/j_spring_security_logout"/><img src="${pageContext.request.contextPath}/pic/logout.jpg" alt="logout"/></a><br/>
-      <a href="${pageContext.request.contextPath}/index.htm"><img src="${pageContext.request.contextPath}/pic/zpet.jpg"></a>
+      <a href="${pageContext.request.contextPath}/customer/menu.htm"><img src="${pageContext.request.contextPath}/pic/zpet.jpg"></a>
     </div>
         <br/>
         

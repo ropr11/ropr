@@ -40,7 +40,7 @@
             <tr>
                 <td><label for="role">Nová role: </label>
                 <form:select path="userRoles" id="userRole">
-                    <form:options items="${userRoles}"  itemValue="id" itemLabel="role"></form:options>
+                    <form:options items="${userRoles}"  itemValue="userRoleId" itemLabel="role"></form:options>
                 </form:select>
                 <form:errors path="userRoles" cssclass="error"></form:errors></td>
                 <td><label for="phoneInput">Telefon </label>

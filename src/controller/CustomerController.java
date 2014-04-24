@@ -82,12 +82,12 @@ public class CustomerController {
               
               for (User user : users) {
               	Hibernate.initialize(user);
-  				user.setIdUser(String.valueOf(user.getIdUser()));
+  				user.setIdUser(user.getIdUser());
   			}
     	  } else {
     		  users = new ArrayList<User>();
     		  User current = userController.getCurrentUser();
-    		  current.setIdUser(String.valueOf(current.getIdUser()));
+    		  current.setIdUser(current.getIdUser());
     		  users.add(current);
     	  }
             
@@ -132,7 +132,7 @@ public class CustomerController {
             //save changes done in user role setup 
             if( user.getUserRoles() != null){
             	for (UserRole roleToSet : user.getUserRoles()) {
-                	UserRole role = userRolesDao.loadUserRoleById(Integer.parseInt(roleToSet.getRole()));
+                	UserRole role = userRolesDao.loadUserRoleById(Integer.parseInt(roleToSet.getRole()), false);
                 	newRoles.add(role);
                 }
                 user.setUserRoles(newRoles);
@@ -146,7 +146,7 @@ public class CustomerController {
             
             Session session = HibernateUtil.getSessionFactory().getCurrentSession();
             session.beginTransaction();
-            if(user.getIdUser() != null && !user.getIdUser().isEmpty()){
+            if(user.getIdUser() != null && !(user.getIdUser()== 0)){
             	session.update(user);
             }else{
             	session.save(user);

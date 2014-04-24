@@ -31,6 +31,7 @@
                 <th>Do města</th>
                 <th>Ulice</th>
                 <th>Počet kilometrů</th>
+                 <th>Status objednávky</th>
                 
                 </tr>
                 
@@ -41,6 +42,7 @@
                     <td><c:out value="${order.cityTo}"></c:out></td>
                     <td><c:out value="${order.streetTo}"></c:out></td>
                     <td><c:out value="${order.countOfKm}"></c:out></td>
+                    <td><c:out value="${order.status}"></c:out></td>
                     <td><a href="${editUrl}">Edit</a></td>
    					<td><a href="${deleteUrl}">Delete</a></td>
   					
