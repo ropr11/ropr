@@ -1,5 +1,6 @@
 package test.java.dao;
 
+import controller.UserController;
 import java.io.Serializable;
 
 import static  org.junit.Assert.*;
@@ -8,6 +9,8 @@ import model.User;
 import org.junit.Test;
 
 import dao.UserDao;
+import java.util.Set;
+import model.UserRole;
 import org.junit.Ignore;
 
 //@RunWith(SpringJUnit4ClassRunner.class);
@@ -42,5 +45,18 @@ public class UserDaoTest extends AbstractDaoTest  {
 		// Clean
 		userDao.deleteUser(userFromDb);
 	}
+        @Test
+        public void LoadUserRoleIdByNameTest (){
+           Integer id = userRoleDao.loadUserRoleIdByName(UserController.EMPLOYEE_ROLE);
+            assertEquals(2,id.intValue());
+        }
 
+        @Test
+        public void LoadUsersByRoleNameTest (){
+          Set<User> users = userRoleDao.loadUsersByRoleName(UserController.EMPLOYEE_ROLE);
+            assertTrue(!users.isEmpty());
+            
+}
+        
+        
 }

@@ -1,6 +1,6 @@
 package model;
-// default package
-// Generated Mar 19, 2014 11:06:25 AM by Hibernate Tools 4.0.0
+
+// Generated Apr 24, 2014 12:42:14 AM by Hibernate Tools 4.0.0
 
 import java.util.HashSet;
 import java.util.Set;
@@ -10,7 +10,7 @@ import java.util.Set;
  */
 public class UserRole implements java.io.Serializable {
 
-	private Integer id;
+	private Integer userRoleId;
 	private String role;
 	private Set users = new HashSet(0);
 
@@ -26,12 +26,12 @@ public class UserRole implements java.io.Serializable {
 		this.users = users;
 	}
 
-	public Integer getId() {
-		return this.id;
+	public Integer getUserRoleId() {
+		return this.userRoleId;
 	}
 
-	public void setId(Integer userRoleId) {
-		this.id = userRoleId;
+	public void setUserRoleId(Integer userRoleId) {
+		this.userRoleId = userRoleId;
 	}
 
 	public String getRole() {
