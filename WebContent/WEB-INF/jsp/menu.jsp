@@ -20,11 +20,17 @@
         <br /> <br /><br /><br /> 
         <div align="center">
             
-         <c:forEach items="${urls}" var="url">
+         <table>
                 <tr>
-                    <td><c:out value="${url}" escapeXml="false"></c:out></td>
+                    <td> <a href="list"><img src="${pageContext.request.contextPath}/pic/vypuz.jpg" alt="vypis"/></a></td>
+                    <td> <a href="new"><img src="${pageContext.request.contextPath}/pic/novy.jpg" alt="novy"/></a> </td>
                 </tr>
-            </c:forEach> 
+                <tr>
+                    <td><a href="list"><img src="${pageContext.request.contextPath}/pic/vypis.jpg" alt="vypis" /></a> </td>
+                    <td><a href="new"><img src="${pageContext.request.contextPath}/pic/nova.jpg" alt="novy"/></a></td>
+                </tr>
+             </table>
+           
         <br />
  
         </div>
@@ -32,3 +38,4 @@
         
     </body>
 </html>
+

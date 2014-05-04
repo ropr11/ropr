@@ -14,12 +14,19 @@
         </div>
         <br /> <br /><br /><br /> 
         <div align="center">
-            
-        <a href="list"><img src="${pageContext.request.contextPath}/pic/vypuz.jpg" alt="vypis"/></a> 
-        <a href="new"><img src="${pageContext.request.contextPath}/pic/novy.jpg" alt="novy"/></a> 
+            <table>
+                <tr>
+                    <td> <a href="list"><img src="${pageContext.request.contextPath}/pic/vypuz.jpg" alt="vypis"/></a></td>
+                    <td> <a href="new"><img src="${pageContext.request.contextPath}/pic/novy.jpg" alt="novy"/></a> </td>
+                </tr>
+                <tr>
+                    <td><a href="list"><img src="${pageContext.request.contextPath}/pic/vypis.jpg" alt="vypis" /></a> </td>
+                    <td><a href="new"><img src="${pageContext.request.contextPath}/pic/nova.jpg" alt="novy"/></a></td>
+                </tr>
+             </table>
+             
         <br /><br />
-        <a href="list"><img src="${pageContext.request.contextPath}/pic/vypis.jpg" alt="vypis" /></a> 
-        <a href="new"><img src="${pageContext.request.contextPath}/pic/nova.jpg" alt="novy"/></a> 
+        
         <br />
         <a href="${pageContext.request.contextPath}/j_spring_security_logout"/><img src="${pageContext.request.contextPath}/pic/logout.jpg" alt="logout"/></a>
         </div>

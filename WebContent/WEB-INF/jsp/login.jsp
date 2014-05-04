@@ -30,31 +30,30 @@
         
             <br/>
                 <br/>
+                
+                
+                           
         <%-- <form name='f' action='/login.htm' method='POST'>--%> 
         <form name='f' action='/RoprProjekt/j_spring_security_check' method='POST'>
-            <table width="380">  
-                <tr >  
-                    <td>Login:</td>  
-                    <td><input type='text' name='j_username' >  
-                    </td>  
-                </tr>  
-                <tr>  
-                    <td>Heslo:  </td>  
-                    <td><input type='password' name='j_password' />  
-                    </td>  
-                </tr>  
-                <tr>  
-                    <td colspan='2'><input name="submit" type="submit"  
-                                           value="submit" />  
-                    </td>  
-                </tr>  
-                <tr>  
-                    <td colspan='2'><input name="reset" type="reset" />  
-                    </td>  
-                </tr>
-                <tr>
-                    <td> </td>
-                    <td align="right"><a href="remind" style="text-decoration: none">Zapomenuté heslo</a></td>
+            <table align="center" width="380">
+                    <tr>
+                        <td>Login:</td>
+                        <td><input type='text' name='j_username' ></td>
+                    </tr>
+                    <tr>
+                        <td>Heslo:</td>
+                        <td><input type='password' name='j_password' /></td>
+                    </tr>
+                    <tr>
+                        <td><input name="submit" type="submit"  
+                                           value="Přihlásit" />  
+                        </td>
+                        <td ><input name="reset" type="reset" value="Resetovat"/>  
+                    </td>
+                    </tr>
+                    <br />
+                    <tr>
+                        <td colspan="2"><a href="remind" style="text-decoration: none">Zapomenuté heslo</a></td>
                 </tr>  
             </table>  
         </form>  

@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Apr 24, 2014 12:42:14 AM by Hibernate Tools 4.0.0 -->
+<hibernate-mapping>
+    <class name="model.UserRole" table="user_role" catalog="ropr">
+        <id name="userRoleId" type="java.lang.Integer">
+            <column name="User_role_ID" />
+            <generator class="identity" />
+        </id>
+        <property name="role" type="string">
+            <column name="Role" length="45" not-null="true" />
+        </property>
+        <set name="users" table="user_authorization" inverse="false" lazy="false" fetch="select">
+            <key>
+                <column name="role_id" not-null="true" />
+            </key>
+            <many-to-many entity-name="model.User">
+                <column name="user_id" not-null="true" />
+            </many-to-many>
+        </set>
+    </class>
+</hibernate-mapping>

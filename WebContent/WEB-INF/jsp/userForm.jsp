@@ -12,26 +12,30 @@
     <body>
         <div align="right">
             <a href="${pageContext.request.contextPath}/j_spring_security_logout"/><img src="${pageContext.request.contextPath}/pic/logout.jpg" alt="logout"/></a><br/>
-        <a href="/index.htm"><img src="${pageContext.request.contextPath}/pic/zpet.jpg"></a>
+        <a href="/RoprProjekt/customer/menu"><img src="${pageContext.request.contextPath}/pic/zpet.jpg"></a>
     </div>
     
     <form:form action="new" modelAttribute="user" method="POST" >
-        <table border="3" cellspacing="4" cellpadding="2" frame="box">
+        <table cellspacing="4" cellpadding="2" frame="box">
             <caption><b>Nový uživatel</b></caption>
             <tr><label for="id"></label>
             <form:input type="hidden" path="idUser" id="idUser"></form:input>
 
             <form:errors path="idUser" cssclass="error"></form:errors>
             </tr>
-            <tr align="center" ><td colspan="2"> <label for="nameInput">Jméno: </label>
-                <form:input path="name" id="nameInput"></form:input>
-                <form:errors path="name" cssclass="error"></form:errors>
+            <tr align="center" ><td> <label for="usernameInput">Login: </label>
+                <form:input path="username" id="usernameInput"></form:input>
+                <form:errors path="username" cssclass="error"></form:errors>
                 </td>
-            </tr>
+                <td> <label for="passwordInput">Heslo: </label>
+                <form:input type="password" path="password" id="passwordInput"></form:input>
+                <form:errors path="password" cssclass="error"></form:errors>
+                </td>
+        </tr>
             <tr>
-                <td> <label for="usernameInput">Jméno: </label>
-                <form:input path="username" id="usernameInput" />
-                <form:errors path="username" cssclass="error"></form:errors></td>
+                <td> <label for="nameInput">Jméno: </label>
+                <form:input path="name" id="nameInput" />
+                <form:errors path="name" cssclass="error"></form:errors></td>
                 
                 <td><label for="surnameInput">Příjmení:</label>
                 <form:input path="surname" id="surnameInput"></form:input>

@@ -15,7 +15,7 @@
     <body>
      <div align="right">
         <a href="${pageContext.request.contextPath}/j_spring_security_logout"/><img src="${pageContext.request.contextPath}/pic/logout.jpg" alt="logout"/></a><br/>
-      <a href="/index.htm"><img src="${pageContext.request.contextPath}/pic/zpet.jpg"></a>
+      <a href="/RoprProjekt/customer/menu"><img src="${pageContext.request.contextPath}/pic/zpet.jpg"></a>
     </div>
         <h3 align="center">Vyplňte, prosím, své osobní údaje:</h3>
             <form:form method="POST" modelattribute="user" commandName="new">

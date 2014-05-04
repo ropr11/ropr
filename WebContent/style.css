@@ -51,14 +51,14 @@ and open the template in the editor.
               -webkit-box-shadow: 0px 0px 2px #000;
               margin-bottom: 10px;
               background: #FFE1FF;
-              width: 170px;
+              width: 190px;
        }
        input.submit {
          -webkit-transition-property: -webkit-box-shadow, background;
          -webkit-transition-duration: 0.25s;
               width: 100px;
               background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#66FFFF), to(#781bb9)); 
-              background:  -moz-linear-gradient(19% 75% 90deg,#781bb9, #66FFFF);
+              background1:  -moz-linear-gradient(19% 75% 90deg,#781bb9, #66FFFF);
               color: #fff;
               text-transform: uppercase;
               text-shadow: #000 1px 1px;
@@ -78,3 +78,5 @@ and open the template in the editor.
               -webkit-box-shadow: 0px 0px 4px #000;
               background: #F5F5F5;
        }
+       
+       

@@ -41,6 +41,9 @@ public class OrderController {
 	
 	public static final String ORDER_STATUS_NEW = "NEW";
 	public static final String ORDER_STATUS_DONE = "DONE";
+	public static final String ORDER_STATUS_PREPARE= "PREPARE";
+        
+        
 	
 
 	Calendar calendar = new GregorianCalendar();
@@ -74,9 +77,11 @@ public class OrderController {
 		if (driverId != null){
 			User driver = userDao.loadUserByUserId(Integer.parseInt(driverId));
 			order.setUserByIdUserDriver(driver);
+                         order.setStatus(ORDER_STATUS_PREPARE);
 		}
+                
 		order.setUserByUserId(userController.getCurrentUser());
-		if(order.getCountOfKm() != null || order.getCountOfKm() != 0){
+		if(order.getCountOfKm() != null && order.getCountOfKm() != 0){
 			order.setStatus(ORDER_STATUS_DONE);
 		}
 		
