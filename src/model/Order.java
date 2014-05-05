@@ -4,6 +4,8 @@ package model;
 
 import java.util.Date;
 
+import org.hibernate.validator.constraints.NotEmpty;
+
 import model.User;
 
 /**
@@ -14,9 +16,13 @@ public class Order implements java.io.Serializable {
 	private Integer orderId;
 	private User userByIdUserDriver;
 	private User userByUserId;
+	@NotEmpty
 	private String cityFrom;
+	@NotEmpty
 	private String cityTo;
+	@NotEmpty
 	private String streetFrom;
+	@NotEmpty
 	private String streetTo;
 	private Integer countOfKm;
 	private Date date;

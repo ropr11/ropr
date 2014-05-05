@@ -16,6 +16,7 @@ import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -34,6 +35,7 @@ import edu.emory.mathcs.backport.java.util.Arrays;
 import java.util.Set;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.validation.Valid;
 
 @Controller
 @RequestMapping(value = "/order")
@@ -41,6 +43,9 @@ public class OrderController {
 	
 	public static final String ORDER_STATUS_NEW = "NEW";
 	public static final String ORDER_STATUS_DONE = "DONE";
+	public static final String ORDER_STATUS_PREPARE= "PREPARE";
+        
+        
 	
 
 	Calendar calendar = new GregorianCalendar();
@@ -67,16 +72,20 @@ public class OrderController {
 	}
 
 	@RequestMapping(value = "/new", method = RequestMethod.POST)
-	
-	
-	public ModelAndView saveOrder(Order order, HttpServletRequest request,   @RequestParam(value="driver", required=false) String driverId) {
-		
+	public ModelAndView saveOrder(@Valid Order order, BindingResult result,   @RequestParam(value="driver", required=false) String driverId) {
+		if(result.hasErrors()){
+			ModelAndView mv = new ModelAndView("orderForm");
+			mv.addObject(order);
+			return mv; 
+		}
 		if (driverId != null){
 			User driver = userDao.loadUserByUserId(Integer.parseInt(driverId));
 			order.setUserByIdUserDriver(driver);
+                         order.setStatus(ORDER_STATUS_PREPARE);
 		}
+                
 		order.setUserByUserId(userController.getCurrentUser());
-		if(order.getCountOfKm() != null || order.getCountOfKm() != 0){
+		if(order.getCountOfKm() != null && order.getCountOfKm() != 0){
 			order.setStatus(ORDER_STATUS_DONE);
 		}
 		
@@ -117,27 +126,6 @@ public class OrderController {
 		boolean isDisabled = (order.getStatus().equalsIgnoreCase(ORDER_STATUS_DONE)) ? true : false;
 		
         Set<User> drivers = userRoleDao.loadUsersByRoleName(UserController.EMPLOYEE_ROLE);
-        
-        /*
-        List<String> driversDto = new ArrayList(); 
-        for (User user : drivers) {
-        	driversDto.add(user.getName());
-		}
-        
-        OrderDTO orderDto = new OrderDTO();
-        
-        orderDto.setCityFrom(order.getCityFrom());
-        orderDto.setStreetFrom(order.getStreetFrom());
-        orderDto.setCityTo(order.getCityTo());
-        orderDto.setStreetTo(order.getStreetTo());
-        
-        orderDto.setCountOfKm(order.getCountOfKm());
-        orderDto.setDate(order.getDate());
-        orderDto.setOrderId(order.getOrderId());
-        orderDto.setStatus(order.getStatus());
-        orderDto.setUserByUserId(order.getUserByUserId());
-        orderDto.setDrivers(drivers);*/
-        
         
 		mv.addObject("isCustomer", userController.userHasRole("ROLE_CUSTOMER"));
 		model.addAttribute("order", order);

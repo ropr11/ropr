@@ -117,12 +117,13 @@ public class CustomerController {
     @RequestMapping(value = "/new", method=RequestMethod.POST)
     @Secured({"ROLE_USER","ROLE_ADMIN"})
     //public ModelAndView newCustomer (HttpServletRequest request){
-    
     public ModelAndView newOrUpdateUser(@Valid User user, BindingResult result, Model m) {
         
-    	/*if(result.hasErrors()) {
-            return new ModelAndView(new RedirectView("new"));
-        }*/
+    	if(result.hasErrors()) {
+    		ModelAndView mv= new ModelAndView("/userForm");
+    		mv.addObject(user);
+    		return mv;
+    	}
     	try {
         	
            

@@ -40,7 +40,9 @@
         <security:authentication-provider ref="daoAuthenticationProvider" />
     </security:authentication-manager>
         
-	
+	<bean id="messageSource" class="org.springframework.context.support.ResourceBundleMessageSource">
+		<property  name="basename" value="resources.messages"/>
+	</bean>
 	
     <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource">
         <property name="driverClassName">
