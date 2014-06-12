@@ -95,7 +95,7 @@ public class OrderController {
 
 	@RequestMapping(value = "/list")
 	@Secured({ "ROLE_USER", "ROLE_ADMIN",UserController.CUSTOMER_ROLE })
-	public ModelAndView listCustomers() {
+	public ModelAndView listOrders() {
 		ModelAndView mv = new ModelAndView("orders");
 		List<Order> orders = new ArrayList<Order>();
 		try {
@@ -116,6 +116,29 @@ public class OrderController {
 		}
 		return mv;
 	}
+	
+	@RequestMapping(value = "/find", method=RequestMethod.POST)
+	@Secured({ "ROLE_USER", "ROLE_ADMIN",UserController.CUSTOMER_ROLE })
+	public ModelAndView listOrdersForUser(@RequestParam String name, @RequestParam String surname) {
+		ModelAndView mv = new ModelAndView("orders");
+		List<Order> orders = new ArrayList<Order>();
+		try {
+			if( !name.isEmpty() && !surname.isEmpty() ){
+				User user = userDao.loadUserByNameAndSurname(name, surname);
+				orders.addAll(orderDao.getAllOrdersByUserId(user.getIdUser()));
+			} else{
+				orders.addAll(orderDao.getAllOrders());
+			}
+				
+		
+
+			mv.addObject("orders", orders);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return mv;
+	}
+
 
 	@RequestMapping(value = "/edit", method = RequestMethod.GET)
 	@Secured({ "ROLE_USER", "ROLE_ADMIN",UserController.CUSTOMER_ROLE })

@@ -19,6 +19,21 @@
     <h3 align="center">Výpis objednávek</h3>
     
         <br/>
+        <form name='find' action='find' method='POST'>
+            <table width="380">  
+                <tr >  
+                    <td>Jméno zákazníka:</td>  
+                    <td>Příjmení zákazníka:  </td>
+                </tr>
+                <tr>
+                     <td><input type='text' name='name' ></td>   
+                     <td><input type='text' name='surname'></td>  
+                  
+                    <td colspan='2'>
+                     	<input name="submit" type="submit" value="Zobraz objednávky" />
+                    </td>  
+                </tr> 
+        
         <table align="center" border="1" cellpadding="5" cellspacing="4" >
            
             <c:forEach items="${orders}" var="order">
