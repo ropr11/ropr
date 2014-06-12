@@ -55,7 +55,7 @@ public class OrderController {
     UserDao userDao = new UserDao();
 
 	@RequestMapping(value = "/new", method = RequestMethod.GET)
-	@Secured({ "ROLE_USER", "ROLE_ADMIN",UserController.CUSTOMER_ROLE })
+	@Secured({ "USER", "ADMIN",UserController.CUSTOMER_ROLE })
 	public ModelAndView newOrder(Model model) {
 		ModelAndView mv = new ModelAndView("orderForm");
 		Order order = new Order();
@@ -67,7 +67,7 @@ public class OrderController {
 		model.addAttribute(order);
 		model.addAttribute("isDisabled",false);
 
-		mv.addObject("isCustomer", userController.userHasRole("ROLE_CUSTOMER"));
+		mv.addObject("isCustomer", userController.userHasRole("CUSTOMER"));
 		return mv;
 	}
 
@@ -94,7 +94,7 @@ public class OrderController {
 	}
 
 	@RequestMapping(value = "/list")
-	@Secured({ "ROLE_USER", "ROLE_ADMIN",UserController.CUSTOMER_ROLE })
+	@Secured({ "USER", "ADMIN",UserController.CUSTOMER_ROLE })
 	public ModelAndView listOrders() {
 		ModelAndView mv = new ModelAndView("orders");
 		List<Order> orders = new ArrayList<Order>();
@@ -109,7 +109,7 @@ public class OrderController {
 				User current = userController.getCurrentUser();
 				orders.addAll(orderDao.getAllOrdersByUserId(current.getIdUser()));
 			}
-                    //    mv.addObject("isCustomer", userController.userHasRole("ROLE_CUSTOMER"));
+                    //    mv.addObject("isCustomer", userController.userHasRole("CUSTOMER"));
 			mv.addObject("orders", orders);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -118,7 +118,7 @@ public class OrderController {
 	}
 	
 	@RequestMapping(value = "/find", method=RequestMethod.POST)
-	@Secured({ "ROLE_USER", "ROLE_ADMIN",UserController.CUSTOMER_ROLE })
+	@Secured({ "USER", "ADMIN",UserController.CUSTOMER_ROLE })
 	public ModelAndView listOrdersForUser(@RequestParam String name, @RequestParam String surname) {
 		ModelAndView mv = new ModelAndView("orders");
 		List<Order> orders = new ArrayList<Order>();
@@ -141,7 +141,7 @@ public class OrderController {
 
 
 	@RequestMapping(value = "/edit", method = RequestMethod.GET)
-	@Secured({ "ROLE_USER", "ROLE_ADMIN",UserController.CUSTOMER_ROLE })
+	@Secured({ "USER", "ADMIN",UserController.CUSTOMER_ROLE })
 	public ModelAndView showUser(@RequestParam(value = "id", required = true) Integer id, Model model) {
 		ModelAndView mv = new ModelAndView("orderForm");
 
@@ -151,7 +151,7 @@ public class OrderController {
 		
         Set<User> drivers = userRoleDao.loadUsersByRoleName(UserController.EMPLOYEE_ROLE);
         
-		mv.addObject("isCustomer", userController.userHasRole("ROLE_CUSTOMER"));
+		mv.addObject("isCustomer", userController.userHasRole("CUSTOMER"));
 		model.addAttribute("order", order);
 		model.addAttribute("drivers", drivers);
                 model.addAttribute("user", user.getName()+" "+user.getSurname());
@@ -160,7 +160,7 @@ public class OrderController {
 	}
 
 	@RequestMapping(value = "/delete", method = RequestMethod.GET)
-	@Secured({ "ROLE_USER", "ROLE_ADMIN",UserController.CUSTOMER_ROLE })
+	@Secured({ "USER", "ADMIN",UserController.CUSTOMER_ROLE })
 	public ModelAndView deleteUser(@RequestParam(value = "id", required = true) Integer id, Model model) {
 		ModelAndView mv = new ModelAndView(new RedirectView("list"));
 

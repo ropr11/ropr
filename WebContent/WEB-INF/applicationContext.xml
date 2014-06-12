@@ -17,7 +17,7 @@
 
     <mvc:annotation-driven/>
     <context:component-scan base-package="controller" />
-    <security:global-method-security secured-annotations="enabled" />
+    <security:global-method-security secured-annotations="enabled" access-decision-manager-ref="accessDecisionManager"/>
 
    <beans:bean id="accessDecisionManager" class="org.springframework.security.access.vote.AffirmativeBased">
     <beans:property name="decisionVoters">

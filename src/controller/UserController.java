@@ -54,9 +54,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @RequestMapping(value = "/user")
 public class UserController implements UserDetailsService {
 
-	public static final String ADMIN_ROLE = "ROLE_ADMIN";
-	public static final String EMPLOYEE_ROLE = "ROLE_USER";
-	public static final String CUSTOMER_ROLE = "ROLE_CUSTOMER";
+	public static final String ADMIN_ROLE = "ADMIN";
+	public static final String EMPLOYEE_ROLE = "USER";
+	public static final String CUSTOMER_ROLE = "CUSTOMER";
 
 	public static List<String> questions = new ArrayList(Arrays.asList(new String[]{"Oblíbený film","Oblíbená kniha","Oblíbené místo","Oblíbený uèitel"}));
 	UserDao userDao = new UserDao();

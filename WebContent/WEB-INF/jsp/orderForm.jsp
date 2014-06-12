@@ -82,7 +82,7 @@
             <form:input path="status" id="status" type="hidden"></form:input>
                 <br />
                
-           <security:authorize access="hasAnyRole('ROLE_ADMIN', 'ROLE_USER')">
+           <security:authorize access="hasAnyRole('ADMIN', 'USER')">
                 
                 <label for="kilometersInput">Počet kilometrů: </label>
             <form:input path="countOfKm" id="countOfKm" disabled="${isCustomer}"></form:input>

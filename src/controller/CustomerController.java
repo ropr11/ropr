@@ -53,12 +53,12 @@ public class CustomerController {
 	UserController userController = new UserController();
 	
 	@RequestMapping(value = "/menu", method = RequestMethod.GET)
-	@Secured({"ROLE_USER",UserController.ADMIN_ROLE,UserController.CUSTOMER_ROLE})
+	@Secured({"USER",UserController.ADMIN_ROLE,UserController.CUSTOMER_ROLE})
 	public ModelAndView loginForm() {
 		ModelAndView mv = new ModelAndView("menu");
 		Set<String> urls = new LinkedHashSet<String>();
 		User currentUser = userController.getCurrentUser();
-		if(userController.userHasRole("ROLE_USER")|| userController.userHasRole("ROLE_ADMIN")){
+		if(userController.userHasRole("USER")|| userController.userHasRole("ADMIN")){
 			urls.add("<tr><td>"+URL_USER_LIST+"</td>");
 			urls.add("<td>"+URL_USER_NEW+"</td></tr>");
 		} 
@@ -72,7 +72,7 @@ public class CustomerController {
 	}
 
    @RequestMapping(value = "/list")
-   @Secured({"ROLE_USER","ROLE_ADMIN"})
+   @Secured({"USER","ADMIN"})
     public ModelAndView listCustomers (){
         ModelAndView mv = new ModelAndView("users");
         String out = "Výpis uživatelù: ";
@@ -101,7 +101,7 @@ public class CustomerController {
     }
    
    @RequestMapping(value = "/new" ,method=RequestMethod.GET )
-   @Secured({"ROLE_USER","ROLE_ADMIN"})
+   @Secured({"USER","ADMIN"})
    public ModelAndView newCustomerForm (Model model){
 	   ModelAndView mv= new ModelAndView("/userForm");
 	   //ModelAndView mv= new ModelAndView("new_customer_form");
@@ -116,7 +116,7 @@ public class CustomerController {
 
    
     @RequestMapping(value = "/new", method=RequestMethod.POST)
-    @Secured({"ROLE_USER","ROLE_ADMIN"})
+    @Secured({"USER","ADMIN"})
     //public ModelAndView newCustomer (HttpServletRequest request){
     public ModelAndView newOrUpdateUser(@Valid User user, BindingResult result, Model m) {
         
@@ -168,7 +168,7 @@ public class CustomerController {
     }
     
     @RequestMapping(value = "/edit" ,method=RequestMethod.GET )
-    @Secured({"ROLE_USER","ROLE_ADMIN"})
+    @Secured({"USER","ADMIN"})
     public ModelAndView showUser (@RequestParam(value="id", required=true) Integer id,Model model){
  	   ModelAndView mv= new ModelAndView("userForm");
  	   
@@ -185,7 +185,7 @@ public class CustomerController {
     }
     
     @RequestMapping(value = "/delete" ,method=RequestMethod.GET )
-    @Secured({"ROLE_USER","ROLE_ADMIN"})
+    @Secured({"USER","ADMIN"})
     public ModelAndView deleteUser (@RequestParam(value="id", required=true) Integer id,Model model){
  	   ModelAndView mv= new ModelAndView(new RedirectView("list"));
  	   
