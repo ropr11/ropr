@@ -1,4 +1,5 @@
-<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+<%@ taglib prefix="security" uri="http://www.springframework.org/security/tags"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8"%>
@@ -80,7 +81,9 @@
             <form:input path="orderId" id="orderId" type="hidden" disabled="${isDisabled}"></form:input>
             <form:input path="status" id="status" type="hidden"></form:input>
                 <br />
-
+               
+           <security:authorize access="hasAnyRole('ROLE_ADMIN', 'ROLE_USER')">
+                
                 <label for="kilometersInput">Počet kilometrů: </label>
             <form:input path="countOfKm" id="countOfKm" disabled="${isCustomer}"></form:input>
             <form:errors path="countOfKm" cssclass="error"></form:errors>
@@ -93,7 +96,7 @@
                         <option value="${driver.idUser}">${driver.name}</option>
                     </c:forEach>
                </select>
-                     
+            </security:authorize>         
                 <br /><br />
                 <input type="submit" value="Submit" />
         </form:form>
