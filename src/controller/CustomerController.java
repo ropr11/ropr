@@ -16,7 +16,7 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-
+import java.util.LinkedHashSet;
 import javax.validation.Valid;
 
 import model.User;
@@ -38,6 +38,7 @@ import dao.HibernateUtil;
 import dao.UserDao;
 import dao.UserRoleDao;
 import edu.emory.mathcs.backport.java.util.Arrays;
+import edu.emory.mathcs.backport.java.util.LinkedList;
 
 @Controller
 @RequestMapping(value = "/customer")
@@ -55,15 +56,15 @@ public class CustomerController {
 	@Secured({"ROLE_USER",UserController.ADMIN_ROLE,UserController.CUSTOMER_ROLE})
 	public ModelAndView loginForm() {
 		ModelAndView mv = new ModelAndView("menu");
-		Set<String> urls = new HashSet<String>();
+		Set<String> urls = new LinkedHashSet<String>();
 		User currentUser = userController.getCurrentUser();
 		if(userController.userHasRole("ROLE_USER")|| userController.userHasRole("ROLE_ADMIN")){
-			urls.add(URL_USER_LIST);
-			urls.add(URL_USER_NEW);
+			urls.add("<tr><td>"+URL_USER_LIST+"</td>");
+			urls.add("<td>"+URL_USER_NEW+"</td></tr>");
 		} 
 		
-		urls.add(URL_ORDER_LIST);
-		urls.add(URL_ORDER_NEW);
+		urls.add("<tr><td>"+URL_ORDER_LIST+"</td>");
+		urls.add("<td>"+URL_ORDER_NEW+"</td></tr>");
 		//URL url = new URL(base url, relative url);
 		mv.addObject("urls",urls);
 		return mv;
@@ -121,7 +122,12 @@ public class CustomerController {
         
     	if(result.hasErrors()) {
     		ModelAndView mv= new ModelAndView("/userForm");
-    		mv.addObject(user);
+    		
+                List<UserRole> roles = userController.setupAvailableUserRoles();
+                mv.addObject("userRoles",roles);
+                mv.addObject("hints",UserController.questions);
+                mv.addObject(user);
+                
     		return mv;
     	}
     	try {

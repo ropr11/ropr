@@ -8,10 +8,10 @@
             <column name="Order_ID" />
             <generator class="identity" />
         </id>
-        <many-to-one name="userByIdUserDriver" class="model.User" fetch="select">
+        <many-to-one name="userByIdUserDriver" class="model.User" lazy="false" fetch="select">
             <column name="Id_User_Driver" />
         </many-to-one>
-        <many-to-one name="userByUserId" class="model.User" fetch="select">
+        <many-to-one name="userByUserId" class="model.User" lazy="false" fetch="select">
             <column name="User_ID" not-null="true" />
         </many-to-one>
         <property name="cityFrom" type="string">

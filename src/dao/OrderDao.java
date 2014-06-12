@@ -9,10 +9,11 @@ import org.hibernate.Session;
 import org.hibernate.Transaction;
 
 import model.Order;
+import org.hibernate.Hibernate;
 
 public class OrderDao {
-	private final String QUERY_LIST_ORDERS = "select * from ropr.order";
-	private final String QUERY_LIST_ORDERS_BY_USERID = "select * from ropr.order where User_ID =:userId";
+	private final String QUERY_LIST_ORDERS = "select * from ropr.order order by date desc";
+	private final String QUERY_LIST_ORDERS_BY_USERID = "select * from ropr.order where User_ID =:userId order by date desc";
 	
 	public Order getOrderById(Integer id){
 		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
@@ -20,7 +21,7 @@ public class OrderDao {
 		Transaction transaction = session.getTransaction();
 		transaction.begin();
 		Order order = (Order) session.get(Order.class, id);
-		transaction.commit();
+                transaction.commit();
 		
 		return order;
 				

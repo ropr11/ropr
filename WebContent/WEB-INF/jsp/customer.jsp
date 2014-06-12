@@ -9,11 +9,27 @@
         <title>Výpis uživatelů</title>
        <meta name="description" >
        <link type="text/css" rel="stylesheet" href="${pageContext.request.contextPath}/style.css" />
+       <style>table { 
+                width: 100%; 
+                border-collapse: collapse; 
+            }
+            /* Zebra striping */
+            tr:nth-of-type(odd) { 
+                background: #eee; 
+            }
+            th { 
+                background: #333; 
+                color: white; 
+                font-weight: bold; 
+            }
+            td, th { 
+                padding: 6px; 
+                border: 1px solid #ccc; 
+                text-align: left; 
+            }</style>
 </head>
 <body >
-    <p align="center">    
-    <a href="menu.htm">Menu</a> 
-    </p>
+  
     <h3 align="center">Výpis uživatelů</h3>
     <div align="right">
         <a href="${pageContext.request.contextPath}/j_spring_security_logout"/><img src="${pageContext.request.contextPath}/pic/logout.jpg" alt="logout"/></a><br/>
@@ -21,12 +37,14 @@
     </div>
         <br/>
         
-        <table align="center" border="3" cellspacing="4" cellpadding="2" frame="box" >
+        <table>
             <tr>
                 <th>ID</th>
                 <th>Jméno</th>
                 <th>Login</th>
                 <th>Heslo</th>
+                <th>Upravit</th>
+                <th>Smazat</th>
             </tr>
             <c:forEach items="${customer}" var="customer">
                 <tr>
@@ -40,3 +58,5 @@
         
     </body>
 </html>
+
+

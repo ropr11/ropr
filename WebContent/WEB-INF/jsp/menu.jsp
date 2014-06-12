@@ -19,12 +19,13 @@
         </div>
         <br /> <br /><br /><br /> 
         <div align="center">
-            
+            <table border="0">  
          <c:forEach items="${urls}" var="url">
-                <tr>
-                    <td><c:out value="${url}" escapeXml="false"></c:out></td>
-                </tr>
+              
+                   <c:out value="${url}" escapeXml="false"></c:out>
+             
             </c:forEach> 
+          </table>
         <br />
  
         </div>

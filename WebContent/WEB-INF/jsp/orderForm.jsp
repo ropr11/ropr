@@ -8,15 +8,35 @@
         <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
         <title>Objednávka</title>
         <link type="text/css" rel="stylesheet" href="${pageContext.request.contextPath}/style.css" />
+        <style>table { 
+                width: 100%; 
+                border-collapse: collapse; 
+            }
+            /* Zebra striping */
+            tr:nth-of-type(odd) { 
+                background: #eee; 
+            }
+            th { 
+                background: #333; 
+                color: white; 
+                font-weight: bold; 
+            }
+            td, th { 
+                padding: 6px; 
+                border: 1px solid #ccc; 
+                text-align: left; 
+            }</style>
     </head>
     <body>
     <div align="right">
         <a href="${pageContext.request.contextPath}/j_spring_security_logout"/><img src="${pageContext.request.contextPath}/pic/logout.jpg" alt="logout"/></a><br/>
-      <a href="/index.htm"><img src="${pageContext.request.contextPath}/pic/zpet.jpg"></a>
+      <a href="/RoprProjekt/customer/menu"><img src="${pageContext.request.contextPath}/pic/zpet.jpg"></a>
     </div>
     <h1 align="center">Objednávka služby</h1>
         <br>
         <form:form action="new" modelAttribute="order" method="POST" >
+            <label for="Zákazník"></label>
+            <c:out value="${user}">${user}</c:out>
             <label for="dateInput">Datum: </label>
             <form:input path="date" id="dateInput" disabled="${isDisabled}"></form:input>
             <form:errors path="date" cssclass="error"></form:errors>
