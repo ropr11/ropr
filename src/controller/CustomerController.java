@@ -16,7 +16,7 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-import java.util.LinkedHashSet;
+
 import javax.validation.Valid;
 
 import model.User;
@@ -24,7 +24,9 @@ import model.UserRole;
 
 import org.hibernate.Hibernate;
 import org.hibernate.Session;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.annotation.Secured;
+import org.springframework.security.authentication.encoding.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -38,7 +40,6 @@ import dao.HibernateUtil;
 import dao.UserDao;
 import dao.UserRoleDao;
 import edu.emory.mathcs.backport.java.util.Arrays;
-import edu.emory.mathcs.backport.java.util.LinkedList;
 
 @Controller
 @RequestMapping(value = "/customer")
@@ -51,20 +52,23 @@ public class CustomerController {
 	UserDao userDao = new UserDao();
 	UserRoleDao userRolesDao = new UserRoleDao();
 	UserController userController = new UserController();
+	@Autowired
+	PasswordEncoder passwordEncoder;
+
 	
 	@RequestMapping(value = "/menu", method = RequestMethod.GET)
 	@Secured({"USER",UserController.ADMIN_ROLE,UserController.CUSTOMER_ROLE})
 	public ModelAndView loginForm() {
 		ModelAndView mv = new ModelAndView("menu");
-		Set<String> urls = new LinkedHashSet<String>();
+		Set<String> urls = new HashSet<String>();
 		User currentUser = userController.getCurrentUser();
-		if(userController.userHasRole("USER")|| userController.userHasRole("ADMIN")){
-			urls.add("<tr><td>"+URL_USER_LIST+"</td>");
-			urls.add("<td>"+URL_USER_NEW+"</td></tr>");
+		if(userController.userHasRole("ROLE_USER")|| userController.userHasRole("ROLE_ADMIN")){
+			urls.add(URL_USER_LIST);
+			urls.add(URL_USER_NEW);
 		} 
 		
-		urls.add("<tr><td>"+URL_ORDER_LIST+"</td>");
-		urls.add("<td>"+URL_ORDER_NEW+"</td></tr>");
+		urls.add(URL_ORDER_LIST);
+		urls.add(URL_ORDER_NEW);
 		//URL url = new URL(base url, relative url);
 		mv.addObject("urls",urls);
 		return mv;
@@ -150,7 +154,8 @@ public class CustomerController {
             }
             
             
-            
+            user.setPassword(passwordEncoder.encodePassword(user.getPassword(),null));
+
             Session session = HibernateUtil.getSessionFactory().getCurrentSession();
             session.beginTransaction();
             if(user.getIdUser() != null && !(user.getIdUser()== 0)){

@@ -64,6 +64,12 @@ public class OrderController {
 		if(order.getStatus() == null){
 			order.setStatus(ORDER_STATUS_NEW);
 		}
+		if (order.getUserByUserId() == null) {
+			mv.addObject("customer", userController.getCurrentUser());
+		} else {
+			mv.addObject("customer", order.getUserByUserId());
+		}
+		
 		model.addAttribute(order);
 		model.addAttribute("isDisabled",false);
 
@@ -154,6 +160,7 @@ public class OrderController {
 		mv.addObject("isCustomer", userController.userHasRole("CUSTOMER"));
 		model.addAttribute("order", order);
 		model.addAttribute("drivers", drivers);
+		model.addAttribute("customer", order.getUserByUserId());
                 model.addAttribute("user", user.getName()+" "+user.getSurname());
 		model.addAttribute("isDisabled",isDisabled);
 		return mv;

@@ -35,9 +35,11 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
 import org.springframework.stereotype.Controller;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.authentication.AuthenticationProvider;
+import org.springframework.security.authentication.encoding.PasswordEncoder;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.GrantedAuthority;
@@ -61,6 +63,8 @@ public class UserController implements UserDetailsService {
 	public static List<String> questions = new ArrayList(Arrays.asList(new String[]{"Oblíbený film","Oblíbená kniha","Oblíbené místo","Oblíbený uèitel"}));
 	UserDao userDao = new UserDao();
 	UserRoleDao userRolesDao = new UserRoleDao();
+	@Autowired
+	PasswordEncoder passwordEncoder;
 
 	private boolean accountNonExpired = true;
 	private boolean accountNonLocked = true;
@@ -155,7 +159,7 @@ public class UserController implements UserDetailsService {
 		}
 
 		org.springframework.security.core.userdetails.User userDetail = new org.springframework.security.core.userdetails.User(user.getUsername(),
-				user.getPassword(), enabled, accountNonExpired, credentialsNonExpired, accountNonLocked, authority);
+				passwordEncoder.encodePassword(user.getPassword(),null), enabled, accountNonExpired, credentialsNonExpired, accountNonLocked, authority);
 		return userDetail;
 
 	}

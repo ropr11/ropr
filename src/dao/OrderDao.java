@@ -4,16 +4,16 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.hibernate.Hibernate;
 import org.hibernate.SQLQuery;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
 import model.Order;
-import org.hibernate.Hibernate;
 
 public class OrderDao {
-	private final String QUERY_LIST_ORDERS = "select * from ropr.order order by date desc";
-	private final String QUERY_LIST_ORDERS_BY_USERID = "select * from ropr.order where User_ID =:userId order by date desc";
+	private final String QUERY_LIST_ORDERS = "select * from ropr.order";
+	private final String QUERY_LIST_ORDERS_BY_USERID = "select * from ropr.order where User_ID =:userId";
 	
 	public Order getOrderById(Integer id){
 		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
@@ -21,7 +21,8 @@ public class OrderDao {
 		Transaction transaction = session.getTransaction();
 		transaction.begin();
 		Order order = (Order) session.get(Order.class, id);
-                transaction.commit();
+		Hibernate.initialize(order);
+		transaction.commit();
 		
 		return order;
 				
@@ -51,6 +52,8 @@ public class OrderDao {
 		SQLQuery query = session.createSQLQuery(QUERY_LIST_ORDERS);
 		query.addEntity(Order.class);
 		orders = query.list();
+		Hibernate.initialize(orders);
+		
 		transaction.commit();
 		
 		return orders;

@@ -34,7 +34,9 @@
     
     <beans:bean id="authenticatedVoter" class="org.springframework.security.access.vote.AuthenticatedVoter" />
     
-        
+    <bean id="passwordEncoder" class="org.springframework.security.authentication.encoding.ShaPasswordEncoder">
+		<constructor-arg value="256" />
+	</bean>    
 
 
     
@@ -105,6 +107,7 @@
 	 
     <bean id="daoAuthenticationProvider"    class="org.springframework.security.authentication.dao.DaoAuthenticationProvider">
         <property name="userDetailsService" ref="userController"/>
+        <beans:property name="passwordEncoder" ref="passwordEncoder" />
     </bean>
 	
 	
