@@ -23,24 +23,32 @@
 
             <form:errors path="idUser" cssclass="error"></form:errors>
             </tr>
-            <tr align="center" ><td colspan="2"> <label for="nameInput">Jméno: </label>
-                <form:input path="name" id="nameInput"></form:input>
-                <form:errors path="name" cssclass="error"></form:errors>
-                </td>
-            </tr>
+                      
+            
             <tr>
-                <td> <label for="usernameInput">Jméno: </label>
-                <form:input path="username" id="usernameInput" />
+                <td> <label for="nameInput">Jméno: </label>
+                <form:input path="name" id="usernameInput" />
                 <form:errors path="username" cssclass="error"></form:errors></td>
                 
                 <td><label for="surnameInput">Příjmení:</label>
                 <form:input path="surname" id="surnameInput"></form:input>
                 <form:errors path="surname" cssclass="error"></form:errors></td>
             </tr>
+            <tr align="center" ><td colspan="2"> <label for="nameInput">Uživatelské jméno: </label>
+                <form:input path="username" id="usernameInput"></form:input>
+                <form:errors path="username" cssclass="error"></form:errors>
+                </td>
+            </tr>
+            
+            <tr align="center" ><td colspan="2"> <label for="nameInput">Heslo: </label>
+                <form:input path="password" id="passwordInput"></form:input>
+                <form:errors path="password" cssclass="error"></form:errors>
+                </td>
+            </tr>
             <tr>
                 <td><label for="role">Nová role: </label>
-                <form:select path="userRoles" id="userRole">
-                    <form:options items="${userRoles}"  itemValue="userRoleId" itemLabel="role"></form:options>
+                <form:select path="userRoles" id="userRoles">
+                    <form:options items="${userRoles}" itemValue="userRoleId" itemLabel="role"></form:options>
                 </form:select>
                 <form:errors path="userRoles" cssclass="error"></form:errors></td>
                 <td><label for="phoneInput">Telefon </label>

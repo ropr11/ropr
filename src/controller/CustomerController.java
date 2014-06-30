@@ -10,13 +10,17 @@ package controller;
  *
  * @author Gahybook
  */
+import java.beans.PropertyEditorSupport;
 import java.net.URI;
 import java.net.URL;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.LinkedHashSet;
+
 import javax.validation.Valid;
 
 import model.User;
@@ -24,10 +28,13 @@ import model.UserRole;
 
 import org.hibernate.Hibernate;
 import org.hibernate.Session;
+import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -120,6 +127,7 @@ public class CustomerController {
     //public ModelAndView newCustomer (HttpServletRequest request){
     public ModelAndView newOrUpdateUser(@Valid User user, BindingResult result, Model m) {
         
+    	if(result.hasFieldErrors("username") ||result.hasFieldErrors("password") || result.hasFieldErrors("name") || result.hasFieldErrors("surname") || result.hasFieldErrors("phone")|| result.hasFieldErrors("email")) {
     	if(result.hasErrors()) {
     		ModelAndView mv= new ModelAndView("/userForm");
     		
@@ -136,10 +144,18 @@ public class CustomerController {
             
             Set<UserRole> newRoles = new HashSet<UserRole>();
             
+            Set rolesFromUser = user.getUserRoles();
+            
+            
             //save changes done in user role setup 
             if( user.getUserRoles() != null){
-            	for (UserRole roleToSet : user.getUserRoles()) {
-                	UserRole role = userRolesDao.loadUserRoleById(Integer.parseInt(roleToSet.getRole()), false);
+            	for (Object roleToSet : rolesFromUser) {
+            		UserRole role;
+                	if(roleToSet instanceof UserRole){
+                		role = (UserRole) roleToSet;
+                	} else {
+                		role = (UserRole)userRolesDao.loadUserRoleById(Integer.parseInt((String) roleToSet), false);
+                	}
                 	newRoles.add(role);
                 }
                 user.setUserRoles(newRoles);
