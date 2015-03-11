@@ -109,7 +109,7 @@ public class OrderController {
 				User current = userController.getCurrentUser();
 				orders.addAll(orderDao.getAllOrdersByUserId(current.getIdUser()));
 			}
-
+                    //    mv.addObject("isCustomer", userController.userHasRole("ROLE_CUSTOMER"));
 			mv.addObject("orders", orders);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -146,13 +146,15 @@ public class OrderController {
 		ModelAndView mv = new ModelAndView("orderForm");
 
 		Order order = orderDao.getOrderById(id);
-		boolean isDisabled = (order.getStatus().equalsIgnoreCase(ORDER_STATUS_DONE)) ? true : false;
+                User user = order.getUserByUserId();
+                boolean isDisabled = (order.getStatus().equalsIgnoreCase(ORDER_STATUS_DONE)) ? true : false;
 		
         Set<User> drivers = userRoleDao.loadUsersByRoleName(UserController.EMPLOYEE_ROLE);
         
 		mv.addObject("isCustomer", userController.userHasRole("ROLE_CUSTOMER"));
 		model.addAttribute("order", order);
 		model.addAttribute("drivers", drivers);
+                model.addAttribute("user", user.getName()+" "+user.getSurname());
 		model.addAttribute("isDisabled",isDisabled);
 		return mv;
 	}

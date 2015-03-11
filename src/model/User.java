@@ -23,6 +23,7 @@ public class User implements java.io.Serializable {
 	@NotEmpty
 	private String surname;
 	@Email
+        @NotEmpty
 	private String email;
 	@NotEmpty
 	private String phone;

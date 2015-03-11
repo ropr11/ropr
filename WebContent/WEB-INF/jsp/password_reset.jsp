@@ -11,8 +11,8 @@
     <body>
         <h1>New password has been setup</h1>
 
-        After a few seconds you will be redirected to the login page 
+        After a few seconds you will be redirected to the login page. 
 
-        <a href="${pageContext.request.contextPath}/login">login again</a>
+        <a href="${pageContext.request.contextPath}/user/login">login again</a>
     </body>
 </html>
